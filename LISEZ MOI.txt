@@ -1,0 +1,10 @@
+Le Compte-rendu général de l'expé 2023, appelé "Synthèse 2023" 
+est une copie du fichier original situé dans le dossier 
+Résistants Rhodaniens / 2023 / ResistantsRhodaniens-2023.html
+
+Pour le mettre à jour il faut faire tourner le script situé dans le dossier 2023, 
+puis ensuite recopier ici le fichier
+Et le renommer en "Synthses2023" sans accent tout attaché
+
+Le fichier Synthèse est est lourd (environ 40Mo) car les images associées sont intégrées "dedans"
+

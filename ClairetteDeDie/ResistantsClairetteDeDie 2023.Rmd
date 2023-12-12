@@ -1,8 +1,8 @@
 ---
 title: |
-  <center> Résistants Clairette de Die </center>
-  <center> Compte-rendu technique 2023 </center>
-  <center> + Fiches par génotypes </center>
+  <center>Résistants Clairette de Die </center>
+  <center>Compte-rendu technique 2023 </center>
+  <center>& Fiches par génotypes </center>
 author: "Viviane Bécart"
 date: "`r Sys.Date()`"
 output :
@@ -37,7 +37,7 @@ logo <- "Graphiques 2023/InstitutPetit.png"
 ```
 <center>![](`r logo`)</center>  
 Compte-rendu technique et présentation des résultats spécifique **Clairette de Die**  
-Les résultats généraux Résistants Rhodaniens sont consultables ici : **LIEN**
+Les résultats généraux Résistants Rhodaniens sont consultables ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/Synthese2023.html)
 
 # Contexte de l'étude
 Les **Résistants Clairette de Die** sont des croisements réalisés par l’IFV et l’INRA pour le compte de l’ODG Clairette de Die. Les croisements impliquent le parent vinifera Muscat à Petits Grains blancs et la finalité de cette expérimentation est la sélection de variétés résistantes aux maladies (polygéniques), adaptées au climat du changement climatique, avec pour objectif produit l’élaboration de crémants blancs aux arômes muscatés.  

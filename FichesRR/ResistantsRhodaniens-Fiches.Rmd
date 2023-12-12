@@ -35,7 +35,9 @@ knitr::opts_chunk$set(warning = FALSE)
 # Introduction {.unnumbered}
 Ce document est une annexe au compte-rendu technique d'expérimentation des "Résistants Rhodaniens et Clairette de Die" pour l'année 2023.
 Il présente les multiples résultats d'observation du dispositif des "Résistants Rhodaniens" présentés sous forme de **fiches individuelles pour chaque génotype**, avec les données des millésimes 2022 et 2023.
-Il peut servir d'outil pour les réflexions de sélection.
+Il peut servir d'outil pour les réflexions de sélection.  
+  
+Le compte-rendu technique global de 2023 est consultable ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/Synthese2023.html)  
 \newpage
 
 ```{r, echo=FALSE}
