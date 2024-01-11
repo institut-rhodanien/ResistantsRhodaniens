@@ -2,7 +2,7 @@
 title: |
   <center> Résistants Rhodaniens 2023 </center>
   <center> Fiches par génotypes </center>
-author: "Viviane Bécart"
+author: "Viviane Bécart    v.becart@institut-rhodanien.com"
 date: "`r Sys.Date()`"
 output :
   rmdformats::downcute:

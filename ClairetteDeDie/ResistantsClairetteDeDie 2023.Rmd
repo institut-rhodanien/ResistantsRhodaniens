@@ -3,7 +3,7 @@ title: |
   <center>Résistants Clairette de Die </center>
   <center>Compte-rendu technique 2023 </center>
   <center>& Fiches par génotypes </center>
-author: "Viviane Bécart"
+author: "Viviane Bécart    v.becart@institut-rhodanien.com"
 date: "`r Sys.Date()`"
 output :
   rmdformats::downcute:
@@ -97,7 +97,7 @@ Voici les observations réalisées :
 # Appréciation globale à la récolte 
 ```{r }
 RR2023_Appreciation_RM2021 <- "Graphiques 2023/RR2023_RM2021_note_globale_stack.png"
-NoteEmoji_RM2021<- "Graphiques 2023/NoteEmoji_ResDie_2021.png"
+NoteEmoji_RM2021 <- "Graphiques 2023/NoteEmoji_RM2021_double.png"
 ```
 
 Une visite a été effectuée fin août par les chargés d'études et stagiaires partenaires impliqués dans le projet afin de donner une note d’appréciation globale (j’aime / j’aime pas, noté de 1 à 4, 4 étant la meilleure note). L’objectif de cette notation est d’éliminer progressivement de nos observations les génotypes faisant consensus vers le bas, parce qu’ils présentent des défauts rédhibitoires.  
@@ -105,7 +105,7 @@ Ci-dessous le graphique montre les génotypes classés par notes totales décroi
 ![Appréciation globale à la récolte des génotypes Résistants Clairette de Die en 3ème feuille en 2023](`r RR2023_Appreciation_RM2021`)
 
 Après avoir centré et réduit les notes des différents millésimes on peut répartir, pour chaque millésime indépendamment, les génotypes par catégories du moins apprécié au plus apprécié : 
-`r emo::ji("pouting_face")` - `emo::ji("slightly_frowning_face")` - `emo::ji("neutral_face")` - `emo::ji("slightly_smiling_face")` - `emo::ji("star_struck")`  
+`r emo::ji("pouting_face")` - `r emo::ji("slightly_frowning_face")` - `r emo::ji("neutral_face")` - `r emo::ji("slightly_smiling_face")` - `r emo::ji("star_struck")`  
 
 Ci-dessous les appréciations représentées par des emoji en 2023 pour les Résistants Clairette de Die.  
 ![Appréciation emoji des Résistants Clairette de Die 3ème feuille](`r NoteEmoji_RM2021`)  
@@ -115,10 +115,60 @@ Ci-dessous les appréciations représentées par des emoji en 2023 pour les Rés
 
 ## Maladies {.tabset}
 
+```{r }
+necroses2023 <- "Graphiques 2023/tableau_nécroses.png"
+BRbloque <- "Photos 2023/SélectionNécroses/BR-bloqué.png"
+Grenache_Témoin <- "Photos 2023/SélectionNécroses/Grenache_Témoin.png"
+Grenache_TNT <- "Photos 2023/SélectionNécroses/Grenache_TNT.png"
+Muscaris_fructi_seches <- "Photos 2023/SélectionNécroses/Muscaris_04_Fructifications_seches.png"
+RR006_nervures <- "Photos 2023/SélectionNécroses/RR006_nervures.png"
+RR009_blackrot <- "Photos 2023/SélectionNécroses/RR009_blackrot.png"
+RR091_mildiou_fructifications <- "Photos 2023/SélectionNécroses/RR091_mildiou_fructification.png"
+RR109_gros_points <- "Photos 2023/SélectionNécroses/RR109_gros_points.png"
+RR135_petits_points <- "Photos 2023/SélectionNécroses/RR135_petits_points.png"
+RR139_gros_point_lisere <- "Photos 2023/SélectionNécroses/RR139_gros_point_lisere.png"
+```
 
-<span style="color: red;">
-A FAIRE
-</span>
+Lors d'un passage en octobre 2023 l'ensemble des génotypes a été observé (aussi bien les 5ème feuille que les 3ème feuille, les 2ème feuille et les ResDur2).  
+On été notés :   
+- le poucentage de feuilles présentant des nécroses  
+- l'intensité globale (en %) de surface foliaire affectée par les nécroses de résistance  
+- le type de nécroses : petites nécroses ou "petits points", nécroses plus importantes rondes avec ou sans liseré, grosses taches allongées...  
+- la localisation préférentielle des nécroses : ensemble du limbe, jeunes feuilles, le long des nervures...  
+- présence ou non de black-rot et intensité de l'attaque (BR, BR++). Certaines taches présentes font penser à des tâches de black-rot mais l'intérieur des taches est de couleur plutôt grise au lieu de brun clair avec picnides. Nous avons appelé ce fasciès "BR bloqué". Est-ce une manifestation d'un certain niveau de résistance à cette maladie ?  
+
+Ci-dessous le tableau récapitulant l'ensemble des résultats de ces observations maladies.   
+![Tableau des nécroses 2023](`r necroses2023`)  
+
+Voici quelques exemples de ce qui peut être observé sur le dispositif :  
+Le <span style="color: red;">**Grenache témoin**</span> (traité) à gauche et le <span style="color: red;">**Grenache témoin non traité**</span> (à droite) pour lequel on constate une défoliation quasi totale.  
+![Grenache témoin traité en 2023](`r Grenache_Témoin`) ![Grenache témoin non traité en 2023](`r Grenache_TNT`)  
+
+Nécroses de résistance faciès **petits points noirs**  
+![Petits points noirs](`r RR135_petits_points`)  
+
+Nécroses de résistance faciès **gros points noirs**  
+![Gros points noirs](`r RR109_gros_points`)  
+  
+Nécroses localisées de façon préférentielle le long des **nervures**  
+![Nécroses le long des nervures](`r RR006_nervures`)  
+  
+Nécroses de résistance faciès **grosses taches brunes à liseré**  
+![Grosses taches brunes à liseré](`r RR139_gros_point_lisere`)   
+
+**Fructifications sèches** sur Muscaris   
+![Fructifications sèches sur Muscaris](`r Muscaris_fructi_seches`)   
+  
+**Fructifications actives** sur un des génotypes, le <span style="color: #89BA21;">**RR091**</span>   
+![Fructifications actives](`r RR091_mildiou_fructifications`)   
+
+**Black-rot actif** sur jeunes feuilles  
+![Black-rot actif sur jeunes feuilles](`r RR009_blackrot`)   
+  
+**Black-rot "bloqué"** sur jeunes feuilles, avec centre de la tache gris au lieu d'être brun avec des picnides
+![Black-rot bloqué](`r BRbloque`)   
+
+
 
 
 
