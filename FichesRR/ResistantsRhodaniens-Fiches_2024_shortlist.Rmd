@@ -1,12 +1,12 @@
 ---
 title: |
   <center> Résistants Rhodaniens 2024  </center>
-  <center> Fiches par génotypes - Plantés en 2019</center>
+  <center> Génotypes présélectionnés</center>
 author: "Viviane Bécart    v.becart@institut-rhodanien.com"
 date: "`r Sys.Date()`"
 output :
   rmdformats::downcute:
-    self_contained: false #mettre FALSE pour pas que le fichier pèse trois tonnes
+    self_contained: FALSE #mettre FALSE pour pas que le fichier pèse trois tonnes #si on met TRUE on a tout dans le meme fichier html
     default_style: "light"
     downcute_theme: "default"
     #highlight : # syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock", and "textmate". Pass NULL to prevent syntax highlighting.
@@ -33,13 +33,8 @@ knitr::opts_chunk$set(warning = FALSE)
 ```
 
 # Introduction {.unnumbered}
-Ce document est une annexe au compte-rendu technique d'expérimentation des "Résistants Rhodaniens et Clairette de Die" pour l'année 2024.
-Il présente les multiples résultats d'observation du dispositif des "Résistants Rhodaniens" présentés sous forme de **fiches individuelles pour chaque génotype**, avec les données des millésimes 2022, 2023 et 2024.
-Il peut servir d'outil pour les réflexions de sélection.  
+Génotypes présélectionnés candidats pour VATE en 2026.
   
-Le compte-rendu technique global de 2023 est consultable ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
-Le compte-rendu technique global de 2024 est consultable ici : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
-\newpage
 
 ```{r, echo=FALSE}
 ##ce chunk sert à charger toutes les tables utiles à la création du document
@@ -123,7 +118,7 @@ RR_Necroses_MM  <- read_delim("Viti/NecrosesMM.csv", delim = ";", escape_double 
 ```{r,  results="asis", echo = FALSE }
 ## Ce chunk crée la boucle, qui affecte les valeurs propres à chaque génotype
 # la boucle
-vecteurRR <- vecteurRR_P2019
+vecteurRR <- vecteurRR_P2019_shortlist
 for (i in 1:length(vecteurRR)) {
   dt <- IDgeno_copie %>%    filter(ID_geno==vecteurRR[[i]])  
   nomIFV <- paste0("**",as.character(dt[1,3]),"**")

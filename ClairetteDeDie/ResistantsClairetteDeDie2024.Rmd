@@ -1,0 +1,375 @@
+---
+title: |
+  <center>Résistants Clairette de Die </center>
+  <center>Compte-rendu technique 2023 </center>
+  <center>& Fiches par génotypes </center>
+author: "Viviane Bécart    v.becart@institut-rhodanien.com"
+date: "`r Sys.Date()`"
+output :
+  rmdformats::downcute:
+    self_contained: false #mettre true pour l'envoyer en 1 seul fichier ou false si on héberge
+    default_style: "light"
+    downcute_theme: "default"
+    #highlight : # syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock", and "textmate". Pass NULL to prevent syntax highlighting.
+    thumbnails :  TRUE #if TRUE display content images as thumbnails
+    lightbox :  TRUE #if TRUE, add lightbox effect to content images
+    gallery :  TRUE #if TRUE and lightbox is TRUE, add a gallery navigation between images in lightbox display
+    cards : TRUE #if TRUE, sections will be presented as distinct and animated cards
+    embed_fonts :  TRUE
+    use_bookdown :  TRUE #if TRUE, uses html_document2 instead of html_document, thus providing numbered sections and cross references
+    collapsed : FALSE  #pour déterminer si la table est étendue ou compacte par défaut (seulement titres visibles)
+    smooth_scroll : TRUE #(TRUE par défaut) détermine si la TDM défile en même temps que le défilement de la page
+    toc_depth : 4 #adjust table of contents depth
+    toc_float : TRUE # pour que la TDM soit toujours visible dans la marge gauche
+    fig_caption : TRUE #TRUE to render figures with captions
+    fig_width : 4
+    fig_height : 3
+ 
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+```
+```{r }
+logo <- "Graphiques 2023/InstitutPetit.png"
+```
+<center>![](`r logo`)</center>  
+Compte-rendu technique et présentation des résultats spécifique **Clairette de Die**  
+Les résultats généraux Résistants Rhodaniens sont consultables ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/Synthese2023.html)
+
+# Contexte de l'étude
+Les **Résistants Clairette de Die** sont des croisements réalisés par l’IFV et l’INRA pour le compte de l’ODG Clairette de Die. Les croisements impliquent le parent vinifera Muscat à Petits Grains blancs et la finalité de cette expérimentation est la sélection de variétés résistantes aux maladies (polygéniques), adaptées au climat du changement climatique, avec pour objectif produit l’élaboration de crémants blancs aux arômes muscatés.  
+Ces deux expérimentations sont implantées sur la même parcelle viticole. Leur suivi, présenté ici, correspond au **stade 2** de la sélection variétale : observations principalement viticoles de nombreux génotypes issus de ces croisements, avec peu de répétitions de pieds / génotype. À l’issue de ces observations sur plusieurs millésimes, les génotypes les plus intéressants seront répliqués et replantés en plus grand nombre pour permettre des observations viticoles, œnologiques et environnementales plus poussées.
+
+## Dispositif expérimental
+```{r }
+plan <- "Graphiques 2023/Plan ResRhod 2023.jpg"
+tableau_croisements <-"Graphiques 2023/tableau_croisements.png"
+tableau_effectifs <-"Graphiques 2023/tableau_effectifs.png"
+```
+
+La parcelle est située au domaine expérimental de la Chambre d'Agriculture du Vaucluse, à Piolenc. 
+Sa plantation a débuté en 2019 et s’est prolongée en 2021 puis en 2022.   
+Densité de plantation 0,90 x 2,25m. 
+  
+3 rangées ont été plantées en 2019 :  
+-	*Rang 1 :* **Témoins vinifera** traités Grenache et Syrah. Il y a une quinzaine de placettes de chaque cépage, parmi lesquelles seront identifiées chaque année des placettes « non traitées » qui varient chaque année.  
+-	*Rangs 2-3 :* 48 génotypes <span style="color: #89BA21;">**Résistants Rhodaniens**</span>, avec témoins internes et bouts de rangs Floreal et Vidoc.  
+6 rangées ont été plantées en 2021 :  
+-	*Rangs 4 à 8 :* 107 génotypes <span style="color: #89BA21;">**Résistants Rhodaniens**</span>, avec témoins internes et bouts de rangs Floreal et Vidoc.  
+-	*Rangs 8-9 :* 40 génotypes <span style="color: #9A6324;">**Résistants Clairette de Die**</span>, avec témoin interne et bout de rangs Muscaris.  
+3 rangées ont été plantées en 2022 :  
+-	*Rang 10 :* 16 génotypes <span style="color: #89BA21;">**Résistants Rhodaniens**</span>, 4 génotypes <span style="color: #9A6324;">**Résistants Clairette de Die**</span>, 5 génotypes à parent Muscat de Hambourg, avec témoin internes et bout de rangs Floréal / Vidoc / Muscaris  
+-	*Rang 11 :* 5 génotypes **« ResDur 2 »** (Selenor, Opalor, Lilaro, Coliris, Sirano) : cette rangée a complété la parcelle expérimentale afin d’acquérir des données sur ces nouvelles variétés dans un contexte d’observation cohérent.  
+-	*Rang 12 :* **Témoins vinifera** traités (Grenache, Syrah, Muscat PG). Il y a une dizaine de placettes de chaque cépage, parmi lesquelles seront identifiées chaque année des placettes « non traitées » qui varient chaque année.  
+<br/>
+Les placettes de chaque génotype comportent 5 ceps.  
+Les génotypes ont été renumérotés avec attribution d’un code <span style="color: #89BA21;">« **RRXXX** »</span> ou <span style="color: #9A6324;">« **RMXX** »</span>.  
+
+ _Plan du dispositif expérimental des Résistants Rhodaniens et Clairette de Die à Piolenc_ <br/>![Plan du dispositif expérimental des Résistants Rhodaniens et Clairette de Die à Piolenc](`r plan`)
+ 
+ _Détail des croisements implantés_ <br/>![Détail des croisements implantés](`r tableau_croisements`)
+ 
+ _Détail des effectifs par parent_<br/>![Détail des effectifs par parent](`r tableau_effectifs`)
+
+
+## Météo du millésime 2023
+```{r}
+diagramme <- "Graphiques 2023/Ombrothermique_Piolenc_2023_en cours.png"
+```
+ _Diagramme ombrothermique_<br/>![](`r diagramme`)
+
+
+
+# Observations viticoles
+
+Les vignes étaient en 3ème feuille en 2023. Les génotypes n'ont pas été observés de façon précise, car ils étaient en cours d'établissement.
+Les vignes ont été irriguées au cours de l'été, avec un défaut d'irrigation d'origine technique qui a empêché l'arrosage entre fin juillet et début août. Les vignes ont connu un stress hydrique moyen à important, entraînant des défoliations plus ou moins sévères selon les génotypes.
+Voici les observations réalisées : 
+- photographies des génotypes vers la mi-août
+- suivi maturité sur les génotypes visuellement plus intéressants (deux points)
+- vinification du témoin Muscaris, dont la récolte était suffisante
+- caractérisation rapide des génotypes "rabougris"
+- notation de l'intensité des nécroses de résistance aux maladies sur le feuillage, réalisée mi-octobre. 
+
+# Appréciation globale à la récolte 
+```{r }
+RR2023_Appreciation_RM2021 <- "Graphiques 2023/RR2023_RM2021_note_globale_stack.png"
+NoteEmoji_RM2021 <- "Graphiques 2023/NoteEmoji_RM2021_double.png"
+```
+
+Une visite a été effectuée fin août par les chargés d'études et stagiaires partenaires impliqués dans le projet afin de donner une note d’appréciation globale (j’aime / j’aime pas, noté de 1 à 4, 4 étant la meilleure note). L’objectif de cette notation est d’éliminer progressivement de nos observations les génotypes faisant consensus vers le bas, parce qu’ils présentent des défauts rédhibitoires.  
+Ci-dessous le graphique montre les génotypes classés par notes totales décroissantes.  
+![Appréciation globale à la récolte des génotypes Résistants Clairette de Die en 3ème feuille en 2023](`r RR2023_Appreciation_RM2021`)
+
+Après avoir centré et réduit les notes des différents millésimes on peut répartir, pour chaque millésime indépendamment, les génotypes par catégories du moins apprécié au plus apprécié : 
+`r emo::ji("pouting_face")` - `r emo::ji("slightly_frowning_face")` - `r emo::ji("neutral_face")` - `r emo::ji("slightly_smiling_face")` - `r emo::ji("star_struck")`  
+
+Ci-dessous les appréciations représentées par des emoji en 2023 pour les Résistants Clairette de Die.  
+![Appréciation emoji des Résistants Clairette de Die 3ème feuille](`r NoteEmoji_RM2021`)  
+
+
+
+
+## Maladies {.tabset}
+
+```{r }
+necroses2023 <- "Graphiques 2023/tableau_nécroses.png"
+BRbloque <- "Photos 2023/SélectionNécroses/BR-bloqué.png"
+Grenache_Témoin <- "Photos 2023/SélectionNécroses/Grenache_Témoin.png"
+Grenache_TNT <- "Photos 2023/SélectionNécroses/Grenache_TNT.png"
+Muscaris_fructi_seches <- "Photos 2023/SélectionNécroses/Muscaris_04_Fructifications_seches.png"
+RR006_nervures <- "Photos 2023/SélectionNécroses/RR006_nervures.png"
+RR009_blackrot <- "Photos 2023/SélectionNécroses/RR009_blackrot.png"
+RR091_mildiou_fructifications <- "Photos 2023/SélectionNécroses/RR091_mildiou_fructification.png"
+RR109_gros_points <- "Photos 2023/SélectionNécroses/RR109_gros_points.png"
+RR135_petits_points <- "Photos 2023/SélectionNécroses/RR135_petits_points.png"
+RR139_gros_point_lisere <- "Photos 2023/SélectionNécroses/RR139_gros_point_lisere.png"
+```
+
+Lors d'un passage en octobre 2023 l'ensemble des génotypes a été observé (aussi bien les 5ème feuille que les 3ème feuille, les 2ème feuille et les ResDur2).  
+On été notés :   
+- le poucentage de feuilles présentant des nécroses  
+- l'intensité globale (en %) de surface foliaire affectée par les nécroses de résistance  
+- le type de nécroses : petites nécroses ou "petits points", nécroses plus importantes rondes avec ou sans liseré, grosses taches allongées...  
+- la localisation préférentielle des nécroses : ensemble du limbe, jeunes feuilles, le long des nervures...  
+- présence ou non de black-rot et intensité de l'attaque (BR, BR++). Certaines taches présentes font penser à des tâches de black-rot mais l'intérieur des taches est de couleur plutôt grise au lieu de brun clair avec picnides. Nous avons appelé ce fasciès "BR bloqué". Est-ce une manifestation d'un certain niveau de résistance à cette maladie ?  
+
+Ci-dessous le tableau récapitulant l'ensemble des résultats de ces observations maladies.   
+![Tableau des nécroses 2023](`r necroses2023`)  
+
+Voici quelques exemples de ce qui peut être observé sur le dispositif :  
+Le <span style="color: red;">**Grenache témoin**</span> (traité) à gauche et le <span style="color: red;">**Grenache témoin non traité**</span> (à droite) pour lequel on constate une défoliation quasi totale.  
+![Grenache témoin traité en 2023](`r Grenache_Témoin`) ![Grenache témoin non traité en 2023](`r Grenache_TNT`)  
+
+Nécroses de résistance faciès **petits points noirs**  
+![Petits points noirs](`r RR135_petits_points`)  
+
+Nécroses de résistance faciès **gros points noirs**  
+![Gros points noirs](`r RR109_gros_points`)  
+  
+Nécroses localisées de façon préférentielle le long des **nervures**  
+![Nécroses le long des nervures](`r RR006_nervures`)  
+  
+Nécroses de résistance faciès **grosses taches brunes à liseré**  
+![Grosses taches brunes à liseré](`r RR139_gros_point_lisere`)   
+
+**Fructifications sèches** sur Muscaris   
+![Fructifications sèches sur Muscaris](`r Muscaris_fructi_seches`)   
+  
+**Fructifications actives** sur un des génotypes, le <span style="color: #89BA21;">**RR091**</span>   
+![Fructifications actives](`r RR091_mildiou_fructifications`)   
+
+**Black-rot actif** sur jeunes feuilles  
+![Black-rot actif sur jeunes feuilles](`r RR009_blackrot`)   
+  
+**Black-rot "bloqué"** sur jeunes feuilles, avec centre de la tache gris au lieu d'être brun avec des picnides
+![Black-rot bloqué](`r BRbloque`)   
+
+
+
+
+
+# Suivi maturité
+```{r }
+ResDie2023_rabmatu <- "Graphiques 2023/ResDie2023 RAB et Matu.png"
+
+```
+Tableau récaputilatif des états de rabougrissement des vignes 2023-2023 et des suivis de maturité effectués en 2023  
+
+![Matu Résistants Clairette de Die](`r ResDie2023_rabmatu`)
+
+
+# Récolte
+Les vignes du dispositif Clairette de Die étaient en 3ème feuille. Elles ont été égrappées en avant le stade fermeture de la grappe afin de favoriser une bonne implantation des ceps et de ne pas les épuiser. Environ 6 grappes ont été laissées par cep, voire moins selon leur vigueur.  
+Seul le témoin Muscaris, représenté sur plusieurs placettes dans le dispositif, présentait une quantité suffisante de raisin pour permettre la vinification. Ce génotype étant très précoce, il a été récolté dès le 10 août.
+
+
+
+# Vinifications
+Analyses oenologiques du Muscaris fin fermentation alcoolique :  
+Titre Alcoométrique Volumique = 15.33 %vol  
+Acidité Totale = 4.53 g H2SO4/L)  
+pH = 3.55  
+Acide Malique = 2.7 (g/L)  
+Acide Lactique = 0.1 (g/L) 
+
+# Analyse sensorielle
+
+# Fiches individuelles par génotype
+
+```{r, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(extrafont)
+library(gt)
+library(emo)
+
+# chargement des trucs nécessaire à l'édition des sorties individuelles
+IDgeno_copie <- read_delim("IDgeno - Copie.csv", 
+                            delim = ";", escape_double = FALSE, trim_ws = TRUE,  locale = locale(encoding = "WINDOWS-1252"))
+
+GenoResDie <- IDgeno_copie %>%   filter(ID_modacourt %in% c("ResDie", "Muscaris"))
+
+vecteurResDie <- unique(GenoResDie$ID_geno)
+
+JointureMM_noteglobaleVITI_Quintiles <- read_delim("Viti/JointureMM_noteglobaleVITI_Quintiles.csv", 
+                                delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", encoding = "WINDOWS-1252"), trim_ws = TRUE)
+
+ResDie2023_matu_brutes <- read_delim("ResDie2023_matu_brutes.csv", 
+                       delim = ";", escape_double = FALSE, 
+                       locale = locale(decimal_mark = ",",encoding = "WINDOWS-1252"), 
+                       trim_ws = TRUE)
+
+ResDie2023_Rab <- read_delim("ResDie2023_Rab.csv", 
+                       delim = ";", escape_double = FALSE, 
+                       locale = locale(decimal_mark = ",",encoding = "WINDOWS-1252"), 
+                       trim_ws = TRUE)
+
+``` 
+
+```  {r,  results="asis", echo = FALSE }
+
+for (i in 1:length(vecteurResDie)) 
+  {
+  dt <- GenoResDie %>%    filter(ID_geno==vecteurResDie[[i]])  
+  nomIFV <- paste0("**",as.character(dt[1,3]),"**")
+  #dtsurnom <- IDsurnom %>% filter (ID_geno==vecteurResDie[[i]])
+  #surnom <- as.character(ifelse(is.na(dtsurnom[1,2]), ".", (dtsurnom[1,2])))
+  croisement <- as.character(paste0(dt[1,7]," x ", dt[1,9]))
+  anneeplantation <- as.character(dt[1,6])
+
+##commentaire texte
+commentaire2022 <- ResDie2023_Rab %>% filter (ID_placette==vecteurResDie[[i]])%>%
+  mutate(Commentaires2022 =  case_when(is.na(Commentaires2022) == TRUE ~ " ",   !(is.na(Commentaires2022)) ~ paste0(Commentaires2022)))
+commentaire2022_txt <-   as.character(commentaire2022[1, 3])
+
+commentaire2023 <- ResDie2023_Rab %>% filter (ID_placette==vecteurResDie[[i]])%>%
+  mutate(Commentaires2023 =  case_when(is.na(Commentaires2023) == TRUE ~ " ",   !(is.na(Commentaires2023)) ~ paste0(Commentaires2023)))
+commentaire2023_txt <-   as.character(commentaire2023[1, 4])
+    
+## toutes les images dont on a besoin dans la fiche
+image_placette_2023 <- paste0("ResDie 2023 photos/Placette 2023/ANNOTATE-REDIM/",vecteurResDie[[i]],".png")
+image_placette_2023 <- ifelse(isTRUE(file.exists(image_placette_2023)), paste0("![](",image_placette_2023,")")," ")
+
+image_allure_2023 <- paste0("ResDie 2023 photos/Allure 2023/ANNOTATE-REDIM/",vecteurResDie[[i]],".png")
+image_allure_2023 <- ifelse(isTRUE(file.exists(image_allure_2023)), paste0("![](",image_allure_2023,")")," ")
+
+image_grappe_2023_1 <- paste0("ResDie 2023 photos/Grappe 2023/ANNOTATE-REDIM/",vecteurResDie[[i]]," (1).png")
+image_grappe_2023_1 <- ifelse(isTRUE(file.exists(image_grappe_2023_1)), paste0("![](",image_grappe_2023_1,")")," ")
+
+image_grappe_2023_2 <- paste0("ResDie 2023 photos/Grappe 2023/ANNOTATE-REDIM/",vecteurResDie[[i]]," (2).png")
+image_grappe_2023_2 <- ifelse(isTRUE(file.exists(image_grappe_2023_2)), paste0("![](",image_grappe_2023_2,")")," ")
+
+image_grappe_2023_3 <- paste0("ResDie 2023 photos/Grappe 2023/ANNOTATE-REDIM/",vecteurResDie[[i]]," (3).png")
+image_grappe_2023_3 <- ifelse(isTRUE(file.exists(image_grappe_2023_3)), paste0("![](",image_grappe_2023_3,")")," ")
+
+image_necrose_2023 <- paste0("ResDie 2023 photos/Necroses 2023/ANNOTATE-REDIM/",vecteurResDie[[i]],".png")
+image_necrose_2023 <- ifelse(isTRUE(file.exists(image_necrose_2023)), paste0("![](",image_necrose_2023,")")," ")
+
+## appréciations globales par millésimes (emoji)
+dtNoteGlobaleVITI_QT <- JointureMM_noteglobaleVITI_Quintiles %>% filter (ID_geno==vecteurResDie[[i]])%>%
+  select (ID_geno,  NoteGlobaleVITI_2023_QT)
+
+NoteGlobaleVITI_2023_QT <- as.numeric(dtNoteGlobaleVITI_QT[1,2])
+
+emoji2023 <- ifelse (NoteGlobaleVITI_2023_QT == 1, emo::ji("pouting_face"),
+                   ifelse (NoteGlobaleVITI_2023_QT==2,emo::ji("slightly_frowning_face"),
+                           ifelse (NoteGlobaleVITI_2023_QT==3,emo::ji("neutral_face"),
+                                   ifelse (NoteGlobaleVITI_2023_QT==4,emo::ji("slightly_smiling_face"), emo::ji("star_struck")))))
+
+
+## tableau rassemblant les infos viticoles, par quintiles ou avec des phrasounettes
+# Parametre <- c("Vigueur","Défoliation", "Aspect touffu \n et effet parasol", "Nécroses","Black-Rot", "Coulure", "Millerandage", "Flétrissement","Regonflement des baies" )
+Millesime2022 <- c(commentaire2022_txt)
+Millesime2023 <- c(commentaire2023_txt)
+
+dt_parametres <- data.frame( Millesime2022,Millesime2023)%>%
+  knitr::kable(align = "c")%>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+# création d'un dataframe avec les analyses matu 2023
+dtmatu2023 <- ResDie2023_matu_brutes %>% filter (ID_geno==vecteurResDie[[i]])%>% select(Date, TAVP, AT, 'Poids 50b') 
+
+if(nrow(dtmatu2023) == 0){
+  gt_matu2023 <- as.character("Non prélevé" )
+} else {
+  gt_matu2023 <- gt(dtmatu2023, rowname_col = "Date") %>%
+  tab_header(title=md("**Analyses matu 2023**")) %>%
+  cols_label( TAVP = html("TAVP<br>% vol"),
+    AT = html("Acidité Totale<br>g H<sub>2</sub>SO<sub>4</sub>/L"),
+    'Poids 50b' = html("Poids de 50 baies (g) ")) %>%
+ fmt_number(columns=c(2,3),decimals = 2,dec_mark = ".")%>%
+ tab_style(
+   style = cell_text( align = "center"),
+   locations = cells_column_labels(columns = everything())
+   )%>%
+ tab_style(
+   style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+   locations = cells_body(columns = everything(), rows = everything())
+   )%>%
+ tab_style(
+   style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+   locations = cells_column_labels(columns = everything())
+ )
+ }
+
+
+# ICI DEBUTE LE TEXTE A REPETER POUR CHAQUE GENOTYPE
+
+cat("\n") 
+cat("#", vecteurResDie[[i]],  "{.unnumbered}","\n")  
+#le paragraphe des détails du génotype  
+cat("\n") 
+cat("## Détails génotype ","{.unnumbered}","\n")
+cat("\n") 
+cat("Nom génotype :", vecteurResDie[[i]],"\n" )
+cat("\n") 
+cat("Nom IFV :", nomIFV,"\n" )
+cat("\n") 
+# cat("Surnom :", surnom,"\n" ) 
+# cat("\n") 
+cat("Croisement :", croisement,"\n" )
+cat("\n") 
+cat("Année plantation :", anneeplantation,"\n" )
+cat("\n") 
+
+cat("Résumé **appréciation globale viticole** à l'approche de la récolte, millésimes 2023 :\n")
+cat('<center><font size="8">',emoji2023, "</font></center>\n")
+cat("\n") 
+
+cat("Visuel général à l'approche de la récolte 2023 : ")
+cat(image_placette_2023,"\n")
+cat("\n") 
+cat("Visuel général d'un cep moyen sur la placette, à l'approche de la récolte 2023 : ")
+cat(image_allure_2023,"\n")
+cat("\n") 
+cat("Zoom grappes : ")
+cat(image_grappe_2023_1,image_grappe_2023_2,image_grappe_2023_3,"\n")
+cat("\n") 
+cat("Zoom détails remarquables : ")
+cat(image_necrose_2023,"\n")
+cat("\n") 
+
+#récap tableau params viti
+cat("\n") 
+cat("## Caractères viticoles notables ","{.unnumbered}","\n")
+cat("\n") 
+
+cat(dt_parametres)
+cat("\n") 
+
+### matu 2023
+cat("\n") 
+cat("## Suivi matu 2023", " { .unnumbered}" ,"\n")
+cat("\n") 
+print(htmltools::tagList(gt_matu2023))
+cat("\n") 
+
+}
+
+```
