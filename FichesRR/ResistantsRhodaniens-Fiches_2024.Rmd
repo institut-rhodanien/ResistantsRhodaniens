@@ -37,8 +37,8 @@ Ce document est une annexe au compte-rendu technique d'expérimentation des "Ré
 Il présente les multiples résultats d'observation du dispositif des "Résistants Rhodaniens" présentés sous forme de **fiches individuelles pour chaque génotype**, avec les données des millésimes 2022, 2023 et 2024.
 Il peut servir d'outil pour les réflexions de sélection.  
   
-Le compte-rendu technique global de 2023 est consultable ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/Synthese2023.html)  
-Le compte-rendu technique global de 2024 est consultable ici : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/Synthese2024.html)  
+Le compte-rendu technique global de 2023 est consultable ici : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
+Le compte-rendu technique global de 2024 est consultable ici : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
 \newpage
 
 ```{r, echo=FALSE}
