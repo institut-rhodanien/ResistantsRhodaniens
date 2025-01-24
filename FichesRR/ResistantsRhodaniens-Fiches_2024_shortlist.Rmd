@@ -443,7 +443,7 @@ gt_blackrot <- gt(dt_blackrot) %>%
 
 ## stades pheno
 {
-debourrement <- paste0("Viti/Deb/MULTI_boxplot_Deb_",vecteurRR[[i]],".png")
+debourrement <- paste0("Viti/Deb/MULTI_boxplot_deb_",vecteurRR[[i]],".png")
 veraison <- paste0("Viti/Veraison/MULTI_boxplot_ver_",vecteurRR[[i]],".png")
 maturecolte <- paste0("Viti/MatuRec/MULTI_boxplot_maturec_",vecteurRR[[i]],".png")
 duree_cycle <- paste0("Viti/Cycle/Duree_cycle_",vecteurRR[[i]],".png")
