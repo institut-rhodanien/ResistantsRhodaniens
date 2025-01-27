@@ -1,0 +1,57 @@
+---
+title: |
+  <center> Résistants Rhodaniens</center>
+author: "Viviane Bécart    v.becart@institut-rhodanien.com"
+date: "`r Sys.Date()`"
+output :
+  rmdformats::downcute:
+    self_contained: TRUE #mettre FALSE pour pas que le fichier pèse trois tonnes
+    default_style: "light"
+    downcute_theme: "default"
+    #highlight : # syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock", and "textmate". Pass NULL to prevent syntax highlighting.
+    thumbnails :  FALSE #if TRUE display content images as thumbnails
+    lightbox :  FALSE #if TRUE, add lightbox effect to content images
+    gallery :  FALSE #if TRUE and lightbox is TRUE, add a gallery navigation between images in lightbox display
+    cards : FALSE #if TRUE, sections will be presented as distinct and animated cards
+    embed_fonts :  TRUE
+    use_bookdown :  TRUE #if TRUE, uses html_document2 instead of html_document, thus providing numbered sections and cross references
+    collapsed : FALSE
+    smooth_scroll : TRUE
+    toc_depth : 1 #adjust table of contents depth
+    fig_caption : FALSE #TRUE to render figures with captions
+    fig_width : 3
+    fig_height : 3
+    fig.retina : 4
+---
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+```
+```{r }
+logo <- "InstitutPetit.png"
+```
+<center>![](`r logo`)</center> 
+# Compte-rendus techniques Résistants Rhodaniens {.unnumbered}
+  
+Compte-rendu technique de **2024** : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
+Compte-rendu technique de **2023** : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
+  
+Fiches par génotypes :  
+**Génotypes plantés en 2019** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019-Fiches_2024.html)  
+**Génotypes plantés en 2019 - présélection pour VATE** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019_shortlist-Fiches_2024.html)    
+**Génotypes plantés en 2021** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2021-Fiches_2024.html)   
+
+# Résultats spécifiques Clairette de Die  {.unnumbered}
+Compte-rendu technique de **2024** : [**LIEN 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ClairetteDeDie/ResistantsClairetteDeDie2024.html)  
+Fiches par **génotypes Clairette de Die** :  [**Fiches 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsClairetteDeDie-Fiches_2024.html)  
+
+Compte-rendu technique de **2023** : [**LIEN 2023**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ClairetteDeDie/ResistantsClairetteDeDie-2023.html)
+
+
+
+  
+
+\newpage
+
+
