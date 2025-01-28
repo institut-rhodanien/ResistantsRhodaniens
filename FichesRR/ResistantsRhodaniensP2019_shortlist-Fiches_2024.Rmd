@@ -70,7 +70,7 @@ appreciation2024 <-  read_delim("Senso/RR2024_etoiles.csv",
 
 RR_P2019 <- read_csv("Moda/vecteurRR_P2019.csv",   col_names = FALSE)
 vecteurRR_P2019 <- unique(RR_P2019$X1)
-vecteurRR_P2019_shortlist <- c("RR003","RR006", "RR012", "RR013","RR027","RR030", "RR037", "RR045", "RR046", "RR048" )
+vecteurRR_P2019_shortlist <- c("RR003","RR006", "RR030", "RR038", "RR042",  "RR048" )
 
 RR_P2021 <- read_csv("Moda/vecteurRR_P2021.csv",   col_names = FALSE)
 vecteurRR_P2021 <- (RR_P2021$X1)
