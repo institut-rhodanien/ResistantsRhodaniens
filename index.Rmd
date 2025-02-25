@@ -43,7 +43,7 @@ Fiches par génotypes :
 **Génotypes plantés en 2021** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2021-Fiches_2024.html)   
 
 # Résultats spécifiques Clairette de Die  {.unnumbered}
-Compte-rendu technique de **2024** : [**LIEN 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ClairetteDeDie/ResistantsClairetteDeDie2024.html)  
+Compte-rendu technique de **2024** : [**LIEN 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsClairette2024.html)  
 Fiches par **génotypes Clairette de Die** :  [**Fiches 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsClairetteDeDie-Fiches_2024.html)  
 
 Compte-rendu technique de **2023** : [**LIEN 2023**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ClairetteDeDie/ResistantsClairetteDeDie-2023.html)

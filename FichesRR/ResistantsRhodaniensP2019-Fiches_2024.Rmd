@@ -408,7 +408,7 @@ gt_maladies <- gt(sous_tablo_necrosesMM) %>%
   # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
   #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Léger (2-5%)"))%>%
   # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
-  #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Espilon (<1%))"))%>%
+  #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Epsilon (<1%))"))%>%
   # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
   #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="NON"))
   tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
@@ -426,7 +426,7 @@ gt_maladies <- gt(sous_tablo_necrosesMM) %>%
 # OUI (>20%)
 # Oui (5-20%)
 # Léger (2-5%)
-# Espilon (<1%)
+# Epsilon (<1%)
 # NON
 
 
