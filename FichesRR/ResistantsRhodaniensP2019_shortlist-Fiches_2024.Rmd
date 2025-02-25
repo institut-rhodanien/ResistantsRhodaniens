@@ -39,8 +39,7 @@ logo <- "InstitutPetit.png"
 
 Génotypes présélectionnés en vue d'une possible plantation en stade 3 de la sélection (VATE)
 
-Retour vers l'index et les liens vers compte-rendus techniques :  
-[**lien**](https://institut-rhodanien.github.io/ResistantsRhodaniens/index.html)  
+Retour vers l'index [**lien**](https://institut-rhodanien.github.io/ResistantsRhodaniens/index.html)  
 
 \newpage
 
@@ -70,7 +69,7 @@ appreciation2024 <-  read_delim("Senso/RR2024_etoiles.csv",
 
 RR_P2019 <- read_csv("Moda/vecteurRR_P2019.csv",   col_names = FALSE)
 vecteurRR_P2019 <- unique(RR_P2019$X1)
-vecteurRR_P2019_shortlist <- c("RR003","RR006", "RR038", "RR002", "RR037",  "RR013","RR016", "RR030" )
+vecteurRR_P2019_shortlist <- c("RR003","RR006", "RR013", "RR030", "RR037",  "RR038" )
 
 RR_P2021 <- read_csv("Moda/vecteurRR_P2021.csv",   col_names = FALSE)
 vecteurRR_P2021 <- (RR_P2021$X1)
