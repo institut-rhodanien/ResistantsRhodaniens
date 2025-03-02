@@ -478,7 +478,7 @@ Rdt2023 <- ifelse(isTRUE(file.exists(Rdt2023)), paste0("![](",Rdt2023,")"),"Non 
 Rdt2022 <- paste0("Viti/Recolte2022/Poids par cep/RR2022_recolte_poidsparcep_",vecteurRR[[i]],".png")
 Rdt2022 <- ifelse(isTRUE(file.exists(Rdt2022)), paste0("![](",Rdt2022,")"),"Non récolté en 2022")
 
-NbGrappe2024 <- paste0("Viti/Recolte2024/Nb grappes par cep/RR2024_recolte_nbgrappesparcep_",vecteurRR[[i]],".png")
+NbGrappe2024 <- paste0("Viti/Recolte2024/Nb grappes par cep/RR2024_recolte_nb_grappe_",vecteurRR[[i]],".png")
 NbGrappe2024 <- ifelse(isTRUE(file.exists(NbGrappe2024)), paste0("![](",NbGrappe2024,")"),"Non récolté en 2024")
 
 NbGrappe2023 <- paste0("Viti/Recolte2023/Nb grappes par cep/RR2023_recolte_nbgrappesparcep_",vecteurRR[[i]],".png")

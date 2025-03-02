@@ -76,6 +76,8 @@ vecteurRR_P2019_shortlist <- c("RR003","RR006", "RR012", "RR013","RR027","RR030"
 RR_P2021 <- read_csv("Moda/vecteurRR_P2021.csv",   col_names = FALSE)
 vecteurRR_P2021 <- (RR_P2021$X1)
 
+RDie <- read_csv("Moda/vecteurRDie_P2021.csv",   col_names = FALSE)
+vecteurRDie <- (RDie$X1 )
 RDie_P2021 <- read_csv("Moda/vecteurRDie_P2021.csv",   col_names = FALSE)
 vecteurRDie_P2021 <- (RDie_P2021$X1 )
 
@@ -161,20 +163,11 @@ RU_txt <-   paste0("**",as.character(RU[1, 2]),"**")
 dtNoteGlobaleVITI_QT <- JointureMM_noteglobaleVITI_Quintiles %>% filter (ID_geno==vecteurRR[[i]])%>%
   select (ID_geno, NoteGlobaleVITI_2021_QT, NoteGlobaleVITI_2022_QT, NoteGlobaleVITI_2023_QT, NoteGlobaleVITI_2024_QT)
 
-{NoteGlobaleVITI_2021_QT <- as.numeric(dtNoteGlobaleVITI_QT[1,2])
-NoteGlobaleVITI_2022_QT <- as.numeric(dtNoteGlobaleVITI_QT[1,3])
+{
 NoteGlobaleVITI_2023_QT <- as.numeric(dtNoteGlobaleVITI_QT[1,4])
 NoteGlobaleVITI_2024_QT <- as.numeric(dtNoteGlobaleVITI_QT[1,5])}
 
-{emoji2021 <- ifelse (NoteGlobaleVITI_2021_QT == 1, emo::ji("pouting_face"),
-                   ifelse (NoteGlobaleVITI_2021_QT==2,emo::ji("slightly_frowning_face"),
-                           ifelse (NoteGlobaleVITI_2021_QT==3,emo::ji("neutral_face"),
-                                   ifelse (NoteGlobaleVITI_2021_QT==4,emo::ji("slightly_smiling_face"), emo::ji("star_struck")))))
-
-emoji2022 <- ifelse (NoteGlobaleVITI_2022_QT == 1, emo::ji("pouting_face"),
-                   ifelse (NoteGlobaleVITI_2022_QT==2,emo::ji("slightly_frowning_face"),
-                           ifelse (NoteGlobaleVITI_2022_QT==3,emo::ji("neutral_face"),
-                                   ifelse (NoteGlobaleVITI_2022_QT==4,emo::ji("slightly_smiling_face"), emo::ji("star_struck")))))
+{
 
 emoji2023 <- ifelse (NoteGlobaleVITI_2023_QT == 1, emo::ji("pouting_face"),
                    ifelse (NoteGlobaleVITI_2023_QT==2,emo::ji("slightly_frowning_face"),
@@ -445,13 +438,11 @@ GraphMatuIndiv2024 <- paste0("Viti/MatuIndiv2024/",vecteurRR[[i]],"_SuiviMatu-Rh
 Rdt2024 <- ifelse(isTRUE(file.exists(Rdt2024)), paste0("![](",Rdt2024,")"),"Non récolté en 2024")
 
 
-
-NbGrappe2024 <- paste0("Viti/Recolte2024/Nb grappes par cep/RR2024_recolte_nbgrappesparcep_",vecteurRR[[i]],".png")
+NbGrappe2024 <- paste0("Viti/Recolte2024/Nb grappes par cep/RR2024_recolte_nb_grappe_",vecteurRR[[i]],".png")
 NbGrappe2024 <- ifelse(isTRUE(file.exists(NbGrappe2024)), paste0("![](",NbGrappe2024,")"),"Non récolté en 2024")
 
 
-
-PdsGrappe2024 <- paste0("Viti/Recolte2024/Poids une grappe/RR2024_recolte_poids_grappe_",vecteurRR[[i]],".png")
+PdsGrappe2024 <- paste0("Viti/Recolte2024/Poids une grappe/RR2024_recolte_poids_grappe",vecteurRR[[i]],".png")
 PdsGrappe2024 <- ifelse(isTRUE(file.exists(PdsGrappe2024)), paste0("![](",PdsGrappe2024,")"),"Non récolté en 2024")
 
 
@@ -535,8 +526,8 @@ cat("\n")
 cat("\n") 
 cat("## Caractères viticoles","{.unnumbered}","\n")
 cat("\n") 
-cat("Résumé **appréciation globale viticole** à l'approche de la récolte, millésimes 2021 - 2022 - 2023 - 2024:\n")
-cat('<center><font size="6">',"2021 :", emoji2021,"2022 :", emoji2022,"2023 :", emoji2023, "2024 :", emoji2024, "</font></center>\n")
+cat("Résumé **appréciation globale viticole** à l'approche de la récolte, millésimes 2023 - 2024:\n")
+cat('<center><font size="6">',"2023 :", emoji2023, "2024 :", emoji2024, "</font></center>\n")
 cat("\n","\n") 
 cat("Visuel général entre véraison et récolte : ", "\n")
 cat("![2023](",image_allure_2023,")","![2024](",image_allure_2024,")","\n")
