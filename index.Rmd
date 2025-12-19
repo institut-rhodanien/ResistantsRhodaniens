@@ -34,23 +34,31 @@ logo <- "InstitutPetit.png"
 <center>![](`r logo`)</center> 
 # Compte-rendus techniques Résistants Rhodaniens {.unnumbered}
   
+Compte-rendu technique de **2025** : [**LIEN vers résultats 2025 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2025.html)  
 Compte-rendu technique de **2024** : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
 Compte-rendu technique de **2023** : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
   
-Fiches par génotypes :  
+Fiches par génotypes (en cours d'actualisation avec les résultats 2025) :  
 **Génotypes plantés en 2019** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019-Fiches_2024.html)  
 **Génotypes plantés en 2019 - présélection pour VATE** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019_shortlist-Fiches_2024.html)    
 **Génotypes plantés en 2021** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2021-Fiches_2024.html)   
 
 # Résultats spécifiques Clairette de Die  {.unnumbered}
+Compte-rendu technique de **2025** : à venir  
+
 Compte-rendu technique de **2024** : [**LIEN 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsClairette2024.html)  
 Fiches par **génotypes Clairette de Die** :  [**Fiches 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsClairetteDeDie-Fiches_2024.html)  
 
 Compte-rendu technique de **2023** : [**LIEN 2023**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ClairetteDeDie/ResistantsClairetteDeDie-2023.html)
 
+# Autres résultats sur ce dispositif  {.unnumbered}
 
-
+Essai variétés ResDur 2 (Opalor, Selenor, Sirano, Coliris, Lilaro) **2025** : [**Resdur2 2025**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResDur2_2025.pdf)  
+Essai variétés ResDur 2 (Opalor, Selenor, Sirano, Coliris, Lilaro) **2024** : [**Resdur2 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResDur2_2024.pdf)  
   
+Essai de différents modes de conduite Floreal **2025** : [**MDC FLoreal 2025**](https://institut-rhodanien.github.io/ResistantsRhodaniens/RésultatsMDCFloreal2025.pdf)    
+Essai de différents modes de conduite Floreal **2024** : [**MDC FLoreal 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/RésultatsMDCFloreal2024.pdf)  
+
 
 \newpage
 
