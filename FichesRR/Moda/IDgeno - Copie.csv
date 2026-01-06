@@ -54,7 +54,7 @@ RR052;ResRhod;P732-B09-IR-2017;P732-B09;2017;2021;Syrah;1188;D03-PL2;;Syrah;140R
 RR053;ResRhod;P742-F02-IR-2017;P742-F02;2017;2021;Syrah;1188;D03-PL2;;Syrah;140RU;101;oui;oui;;oui;oui;N
 RR054;ResRhod;P938-A07-IR-2017;P938-A07;2017;2021;Grenache;135;D04-PL4;;Grenache;140RU;101;oui;oui;;oui;oui;N
 RR055;ResRhod;P724-E01-IR-2017;P724-E01;2017;2021;Syrah;1188;D03-PL2;;Syrah;140RU;101;oui;oui;;oui;oui;N
-RR056;ResRhod;P719-B10-IR-2017;P719-B10;2017;2021;Grenache;70;Col48#59;;Grenache;140RU;101;oui;;oui;oui;oui;Blanche
+RR056;ResRhod;P719-B10-IR-2017;P719-B10;2017;2021;Grenache;70;Col48#29;;Grenache;140RU;101;oui;;oui;oui;oui;Blanche
 RR057;ResRhod;P675-F06-IR-2017;P675-F06;2017;2021;Grenache;135;D03-PL2;;Grenache;140RU;101;oui;oui;;oui;oui;N
 RR058;ResRhod;P669-E04-IR-2017;P669-E04;2017;2021;Grenache;135;D03-PL2;;Grenache;140RU;101;oui;oui;;oui;oui;N
 RR059;ResRhod;P676-F05-IR-2017;P676-F05;2017;2021;Grenache;135;D03-PL2;;Grenache;140RU;101;oui;oui;;oui;oui;N
@@ -65,7 +65,7 @@ RR063;ResRhod;P733-E03-IR-2017;P733-E03;2017;2021;Syrah;1188;D03-PL2;;Syrah;140R
 RR064;ResRhod;P948-C05-IR-2017;P948-C05;2017;2021;Syrah;1188;Col48#29;;Syrah;140RU;101;oui;;oui;oui;oui;N
 RR065;ResRhod;P676-F03-IR-2017;P676-F03;2017;2021;Grenache;135;D03-PL2;;Grenache;140RU;101;oui;oui;;oui;oui;N
 RR066;ResRhod;P729-A04-IR-2017;P729-A04;2017;2021;Syrah;1188;D03-PL2;;Syrah;140RU;101;oui;oui;;oui;oui;N
-RR067;ResRhod;P717-D02-IR-2017;P717-D02;2017;2021;Grenache;70;Col48#59;;Grenache;140RU;101;oui;;oui;oui;oui;Blanche
+RR067;ResRhod;P717-D02-IR-2017;P717-D02;2017;2021;Grenache;70;Col48#29;;Grenache;140RU;101;oui;;oui;oui;oui;Blanche
 RR068;ResRhod;P956-D01-IR-2017;P956-D01;2017;2021;Syrah;1188;D03-PL2;;Syrah;140RU;101;oui;oui;;oui;oui;N
 RR069;ResRhod;P672-C08-IR-2017;P672-C08;2017;2021;Grenache;135;D03-PL2;;Grenache;140RU;101;oui;oui;;oui;oui;N
 RR070;ResRhod;P735-F04-IR-2017;P735-F04;2017;2021;Syrah;1188;D03-PL2;;Syrah;140RU;101;oui;oui;;oui;oui;N
@@ -208,13 +208,13 @@ Muscaris;Muscaris;;;;2021;;;;;;SO4;;;;;;;Blanche
 Muscaris;Muscaris;;;;2022;;;;;;SO4;;;;;;;Blanche
 Syrah;Syrah;Clone 747;;;2019;;;;;;140RU;101;;;;;;N
 Grenache;Grenache;Clone 516;;;2019;;;;;;140RU;101;;;;;;N
-RR156;ResRhod;R17-P89-IR-2019;R17-P89;2019;2022;Col11#70;;Grenache;136;Grenache;140RU;265;oui;oui;oui;oui;oui;N
-RR157;ResRhod;R18-P74-IR-2019;R18-P74;2019;2022;Col11#70;;Grenache;136;Grenache;140RU;265;oui;oui;;oui;oui;Blanche
-RR158;ResRhod;R18-P77-IR-2019;R18-P77;2019;2022;Col11#70;;Grenache;136;Grenache;140RU;265;oui;oui;oui;oui;oui;N
-RR159;ResRhod;R18-P104-IR-2019;R18-P104;2019;2022;Grenache;70 OU 136;Col11#70 ;;Grenache;140RU;265;oui;oui;oui;oui;oui;N
-RR160;ResRhod;R18-P105-IR-2019;R18-P105;2019;2022;Grenache;70 OU 136;Col11#70 ;;Grenache;140RU;265;oui;oui;;oui;oui;N
+RR156;ResRhod;R17-P89-IR-2019;R17-P89;2019;2022;Col100#70 ;;Grenache;136;Grenache;140RU;265;oui;oui;oui;oui;oui;N
+RR157;ResRhod;R18-P74-IR-2019;R18-P74;2019;2022;Col100#70 ;;Grenache;136;Grenache;140RU;265;oui;oui;;oui;oui;Blanche
+RR158;ResRhod;R18-P77-IR-2019;R18-P77;2019;2022;Col100#70 ;;Grenache;136;Grenache;140RU;265;oui;oui;oui;oui;oui;N
+RR159;ResRhod;R18-P104-IR-2019;R18-P104;2019;2022;Grenache;70 OU 136;Col100#70 ;;Grenache;140RU;265;oui;oui;oui;oui;oui;N
+RR160;ResRhod;R18-P105-IR-2019;R18-P105;2019;2022;Grenache;70 OU 136;Col100#70 ;;Grenache;140RU;265;oui;oui;;oui;oui;N
 RR161;ResRhod;R18-P107-IR-2019;R18-P107;2019;2022;Grenache;70 OU 136;E05-PL8;;Grenache;140RU;265;oui;oui;;oui;oui;N
-RR162;ResRhod;R18-P108-IR-2019;R18-P108;2019;2022;Grenache;70 OU 136;E05-PL8;;Grenache;140RU;265;oui;oui;;oui;oui;N
+RR162;ResRhod;R18-P108-IR-2019;R18-P108;2019;2022;Grenache;70 OU 136;E05-PL8;;Grenache;140RU;265;oui;oui;;oui;oui;Blanche
 RR163;ResRhod;P991-B06-IR-2018;P991-B06;2018;2022;Syrah;1188;D03-PL2;;Syrah;140RU;265;oui;oui;;oui;oui;N
 RR164;ResRhod;P991-C01-IR-2018;P991-C01;2018;2022;Syrah;1188;D03-PL2;;Syrah;140RU;265;oui;oui;;oui;oui;N
 RR165;ResRhod;P992-B07-IR-2018;P992-B07;2018;2022;Syrah;1188;D03-PL2;;Syrah;140RU;265;oui;oui;;oui;oui;N

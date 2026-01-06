@@ -1,0 +1,1004 @@
+---
+title: |
+  <center> Résistants Rhodaniens 2025  </center>
+  <center> Fiches par génotypes</center>
+author: "Viviane Bécart    v.becart@institut-rhodanien.com"
+date: "`r Sys.Date()`"
+output :
+  rmdformats::downcute:
+    self_contained: false #mettre FALSE pour pas que le fichier pèse trois tonnes
+    default_style: "light"
+    downcute_theme: "default"
+    #highlight : # syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock", and "textmate". Pass NULL to prevent syntax highlighting.
+    thumbnails :  TRUE #if TRUE display content images as thumbnails
+    lightbox :  TRUE #if TRUE, add lightbox effect to content images
+    gallery :  TRUE #if TRUE and lightbox is TRUE, add a gallery navigation between images in lightbox display
+    cards : TRUE #if TRUE, sections will be presented as distinct and animated cards
+    embed_fonts :  TRUE
+    use_bookdown :  TRUE #if TRUE, uses html_document2 instead of html_document, thus providing numbered sections and cross references
+    collapsed : TRUE
+    smooth_scroll : TRUE
+    toc_depth : 4 #adjust table of contents depth
+    fig_caption : TRUE #TRUE to render figures with captions
+    fig_width : 3
+    fig_height : 3
+    fig.retina : 4
+---
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+```{r }
+logo <- "InstitutPetit.png"
+```
+<center>![](`r logo`)</center>  
+# Introduction {.unnumbered}
+Ce document est une annexe au compte-rendu technique d'expérimentation des "Résistants Rhodaniens" pour l'année 2025. Il peut servir d'outil pour les réflexions de sélection.  
+Il présente les multiples résultats d'observation du dispositif des Résistants Rhodaniens, présentés sous forme de **fiches individuelles pour chaque génotype**, avec les données des millésimes 2021 à 2025. Les génotypes ont été plantés en plusieurs vagues de plantation : 2019, 2021 et 2022. Selon le génotype il y a entre 2 et 5 millésimes d'observations, ce qui explique qu'il n'y ait pas toujours d'information disponible pour chaque notation.
+
+
+Retour vers l'index et les liens vers compte-rendus techniques :  
+[**lien**](https://institut-rhodanien.github.io/ResistantsRhodaniens/index.html)  
+
+\newpage
+
+```{r, echo=FALSE}
+##ce chunk sert à charger toutes les tables utiles à la création du document
+library(tidyverse)
+library(extrafont)
+library(gt)
+library(emo)
+
+IDgeno_copie <- read_delim("Moda/IDgeno - Copie.csv", 
+                            delim = ";", escape_double = FALSE, trim_ws = TRUE,  locale = locale(encoding = "WINDOWS-1252"))
+Eliminations_Copie <- read_delim("Moda/Eliminations - Copie.csv", 
+                            delim = ";", escape_double = FALSE, trim_ws = TRUE,  locale = locale(encoding = "WINDOWS-1252"))
+
+IDsurnom <- read_delim("Moda/IDsurnom.csv", 
+                       delim = ";", escape_double = FALSE, locale = locale(encoding = "WINDOWS-1252"), 
+                       trim_ws = TRUE)
+RR_ALL <- read_csv("Moda/vecteurRR_ALL.csv",   col_names = FALSE)
+vecteurRR_ALL <- unique(RR_ALL$X1)
+
+
+#chargement de la mégaBDD
+# Fonction pour lire les differentes feuilles excel du tableau multimillesime et les regrouper
+
+library(readxl)
+
+read_excel_allsheets <- function(filename, tibble = FALSE) {
+  sheets <- readxl::excel_sheets(filename)
+  x <- lapply(sheets, function(X) readxl::read_excel(filename, sheet = X))
+  if(!tibble) x <- lapply(x, as.data.frame)
+  names(x) <- sheets
+  x
+}
+
+data <- read_excel_allsheets("BDD RESRHODS - Copie.xlsx")
+
+# attribution de chaque feuille à un objet
+{pheno <- data$PHENOLOGIE
+hydrik <- data$`CONTRAINTE HYDRIQUE`
+maladies <- data$MALADIES
+rendement <- data$RENDEMENT
+viti <- data$`APTITUDES CULTURALES`
+oeno <- data$`APTITUDES OENO`
+degust <- data$DEGUSTATION 
+}
+
+# fusion des feuilles
+{data_rr <-  pheno
+data_rr <- left_join(data_rr, hydrik)
+data_rr <- left_join(data_rr, maladies)
+data_rr <- left_join(data_rr, rendement)
+data_rr <- left_join(data_rr, viti)
+data_rr <- left_join(data_rr, oeno)
+data_rr <- left_join(data_rr, degust)
+data_rr <- left_join(data_rr, Eliminations_Copie)
+data_rr <- left_join(data_rr, IDgeno_copie)
+}
+
+#rm(data, pheno, hydrik, maladies, rendement, viti, oeno, degust)
+
+# selection des données appréciation dégust
+appreciation2022 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2022)
+appreciation2023 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2023)
+appreciation2024 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2024)
+
+#sélection des données oeno
+# data_Vins_2025 <- data_rr %>%
+#   filter (ID_modacourt == "ResRhod")%>% 
+#   select( ID_geno,    starts_with("VIN" )& ends_with("2025")) %>%
+#   filter(!is.na(`VIN_Titre alcoométrique volumique_2025`)) %>%
+#   arrange(ID_geno)
+# 
+# data_Vins_2024 <- data_rr %>%
+#   filter (ID_modacourt == "ResRhod")%>% 
+#   select( ID_geno,    starts_with("VIN" )& ends_with("2024")) %>%
+#   filter(!is.na(`VIN_Dub_Titre alcoométrique volumique_2024`)) %>%
+#   arrange(ID_geno)
+# 
+# data_Vins_2023 <- data_rr %>%
+#   filter (ID_modacourt == "ResRhod")%>% 
+#   select( ID_geno,    starts_with("VIN" )& ends_with("2023")) %>%
+#   filter(!is.na(VIN_TAVP16.83_2023)) %>%
+#   arrange(ID_geno)
+# 
+# data_Vins_2022 <- data_rr %>%
+#   filter (ID_modacourt == "ResRhod")%>% 
+#   select( ID_geno,    starts_with("VIN" )& ends_with("2022")) %>%
+#   filter(!is.na(VIN_TAVP16.83_2022)) %>%
+#   arrange(ID_geno)
+
+# analyses prémise (je ne sais pas encore si je mets toutes les analyses oeno ou juste une petite sélection)
+RR2025_analyses_premise <- read_delim("Oeno/RR2025_analyses_premise.csv",
+    delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",",
+        encoding = "WINDOWS-1252"), trim_ws = TRUE)
+RR2024_analyses_premise <- read_delim("Oeno/RR2024_analyses_premise.csv",
+    delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",",
+        encoding = "WINDOWS-1252"), trim_ws = TRUE)
+RR2022_analyses_premise <- read_delim("Oeno/RR2022_analyses_premise.csv", 
+    delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", 
+        encoding = "WINDOWS-1252"), trim_ws = TRUE)
+RR2023_analyses_premise <- read_delim("Oeno/RR2023_analyses_premise.csv", 
+    delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", 
+        encoding = "WINDOWS-1252"), trim_ws = TRUE)
+
+# notes d'appréciation viti
+smileys_viti <- data_rr %>%  filter (ID_modacourt == "ResRhod")%>% 
+  select(ID_placette, NoteGlobaleViti_Quintile_2021, NoteGlobaleViti_Quintile_2022, NoteGlobaleViti_Quintile_2023, NoteGlobaleViti_Quintile_2024, NoteGlobaleViti_Quintile_2025)
+
+# feuillage
+Feuillage_MM <- data_rr %>% select (ID_placette, LAI_2022, LAI_note_2023  )
+
+# black-rot
+BR_MM <- data_rr %>% select(ID_placette, BR_PctPerteRecolte_2023, BR_PctPerteRecolte_2024, BR_PctPerteRecolte_2025)
+
+# nécroses mildiou
+RR_Necroses_MM  <- read_delim("Viti/NecrosesMM.csv", delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", encoding = "WINDOWS-1252"),trim_ws = TRUE)
+
+Necroses_totales_MM <- data_rr %>% select(ID_placette, Necroses_intensite_globale_2022, Necroses_Intensite_globale_fin_saison_2023, `Necroses_+_Mildiou_Actif_Intensite_globale_fin_saison_2024`, `Necroses_+_Mildiou_Actif_Intensite_globale_fin_saison_2025`)
+
+#présence mildiou actif
+Presence_Mildiou_Actif_MM <- data_rr %>% select(ID_placette, Mildiou_Actif_fin_saison_note_2023,Mildiou_Actif_fin_saison_Pct_2024, Mildiou_Actif_fin_saison_Pct_2025)
+
+# coulure
+Coulure_MM <-  data_rr %>% select(ID_placette,Coulure_2021, Coulure_2022, Coulure_2023,Coulure_2024,Coulure_2025)
+
+# Millerandage
+Millerandage_MM <- data_rr %>% select(ID_placette,Millerandage_2022, Millerandage_2023, Millerandage_2024, Millerandage_2025)
+
+# flétrissement raisins
+Fletri_MM <- data_rr %>% select(ID_placette,Fletrissement_2022, Fletrissement_2023)  
+
+#regonflement raisins
+RR2023_regonflement_baies <- read_delim("Viti/RR2023_regonflement_baies.csv", delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", encoding = "WINDOWS-1252"),trim_ws = TRUE)
+RR2022_regonflement_baies <- read_delim("Viti/RR2022_regonflement_baies.csv", delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ",", encoding = "WINDOWS-1252"),trim_ws = TRUE)
+
+# commentaires de récolte
+Commentaires_MM <- data_rr %>% select(ID_placette,Commentaire_recolte_2023,Commentaire_recolte_2024,Commentaire_recolte_2025)
+
+# exposition des grappes et effet parasol
+ExpoGrappesMM <-  data_rr %>% select(ID_placette,PctGrappesExposees_2024, PctGrappesExposees_2025)
+
+# defloliation, expo des grappes et parasol
+Defoliation_MM <- data_rr %>% select(ID_placette,PctDefolAout_2022,PctDefolAout_2023,PctDefolAout_2024, PctDefolJuillet_2025)
+Grappes_exposees_MM <- data_rr %>% select(ID_placette, PctGrappesExposees_2024, PctGrappesExposees_2025)
+Parasol_MM <- data_rr %>% select(ID_placette,Parasol_note_2023,Parasol_2023, Parasol_2024)
+
+# Réserve utile
+RU_placette <- data_rr %>% select(ID_placette,RU_estimee)
+
+
+```
+
+```{r,  results="asis", echo = FALSE }
+## Ce chunk crée la boucle, qui affecte les valeurs propres à chaque génotype
+# la boucle
+vecteurRR <- vecteurRR_ALL
+for (i in 1:length(vecteurRR)) {
+  dt <- IDgeno_copie %>%   filter(ID_geno==vecteurRR[[i]])  
+  nomIFV <- paste0("**",as.character(dt[1,3]),"**")
+  dtsurnom <- IDsurnom %>% filter (ID_geno==vecteurRR[[i]])
+  surnom <- as.character(ifelse(is.na(dtsurnom[1,2]), ".", (dtsurnom[1,2])))
+  croisement <- as.character(paste0(dt[1,7]," x ", dt[1,9]))
+  anneeplantation <- as.character(dt[1,6])
+
+
+## toutes les images dont on a besoin dans la fiche
+image_feuille <- paste0("Photos_Feuilles/ANNOTATE-REDIM/",vecteurRR[[i]]," (feuille).png")
+
+image_grappe_2022 <- paste0("Photos_Grappes_2022/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_grappe_2023 <- paste0("Photos_Grappes_2023/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_grappe_2024 <- paste0("Photos_Grappes_2024/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_grappe_2025 <- paste0("Photos_Grappes_2025/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+
+image_allure_2022 <-   paste0("Photos_Allure_2022/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_allure_2023 <-   paste0("Photos_Allure_2023/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_allure_2024 <-   paste0("Photos_Allure_2024/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+image_allure_2025 <-   paste0("Photos_Allure_2025/ANNOTATE-REDIM/",vecteurRR[[i]],".png")
+
+## Réserve Utile
+{RUvalue <- RU_placette %>% filter (ID_placette==vecteurRR[[i]])
+RU_txt <-   paste0("**",as.character(round(RUvalue[1, 2]),0),"mm**")
+}
+
+## tableau rassemblant les infos viticoles, par quintiles ou avec des phrasounettes
+##Smileys
+library(emo)
+{dt_smiley_viti <- smileys_viti %>% filter (ID_placette==vecteurRR[[i]]) %>% select(- NoteGlobaleViti_Quintile_2021) %>%
+   rename( `2022` = NoteGlobaleViti_Quintile_2022,
+            `2023` = NoteGlobaleViti_Quintile_2023,
+            `2024` = NoteGlobaleViti_Quintile_2024,
+            `2025` = NoteGlobaleViti_Quintile_2025  )%>%
+    mutate ( `2022` =  case_when(`2022` == 1 ~ emo::ji("pouting_face"),
+                                 `2022` == 2 ~ emo::ji("slightly_frowning_face"),
+                                 `2022` == 3 ~ emo::ji("neutral_face"),
+                                 `2022` == 4 ~ emo::ji("slightly_smiling_face"), 
+                                 `2022` == 5 ~ emo::ji("star_struck"))) %>%
+    mutate ( `2023` =  case_when(`2023` == 1 ~ emo::ji("pouting_face"),
+                                 `2023` == 2 ~ emo::ji("slightly_frowning_face"),
+                                 `2023` == 3 ~ emo::ji("neutral_face"),
+                                 `2023` == 4 ~ emo::ji("slightly_smiling_face"), 
+                                 `2023` == 5 ~ emo::ji("star_struck"))) %>%
+    mutate ( `2024` =  case_when(`2024` == 1 ~ emo::ji("pouting_face"),
+                                 `2024` == 2 ~ emo::ji("slightly_frowning_face"),
+                                 `2024`== 3 ~ emo::ji("neutral_face"),
+                                 `2024`== 4 ~ emo::ji("slightly_smiling_face"), 
+                                 `2024` == 5 ~ emo::ji("star_struck"))) %>%
+    mutate ( `2025` =  case_when(`2025` == 1 ~ emo::ji("pouting_face"),
+                                 `2025` == 2 ~ emo::ji("slightly_frowning_face"),
+                                 `2025`== 3 ~ emo::ji("neutral_face"),
+                                 `2025`== 4 ~ emo::ji("slightly_smiling_face"), 
+                                 `2025` == 5 ~ emo::ji("star_struck")  ))
+}         
+
+gt_smileys_viti <- gt(dt_smiley_viti) %>%
+  cols_label( ID_placette ="") %>%
+  tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
+            locations=cells_column_labels(columns = everything())) %>%
+  tab_style(style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything()) )%>%
+  tab_style(style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())    )
+  
+
+##commentaire texte
+{dt_commentaires <- Commentaires_MM %>% filter (ID_placette==vecteurRR[[i]])%>% 
+    mutate(`2022`=" ") %>%
+    rename(`2023` = Commentaire_recolte_2023,
+          `2024` = Commentaire_recolte_2024,
+          `2025` = Commentaire_recolte_2025  )%>%
+    mutate(`2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  !(is.na(`2023`)) ~ paste0(`2023`))) %>%
+    mutate(`2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  !(is.na(`2024`)) ~ paste0(`2024`))) %>%
+    mutate(`2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  !(is.na(`2025`)) ~ paste0(`2025`))) %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+  }    
+
+# vigueur feuillage
+{
+dt_feuillage <- Feuillage_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
+  rename(`2022`= LAI_2022,`2023` = LAI_note_2023 )%>% 
+  mutate(`2024`=" ") %>%
+  mutate(`2025`=" ") %>%
+  mutate ( `2023` =  case_when(is.na(`2023`) == TRUE ~ " ", 
+                               `2023` == 5 ~ "Très vigoureux",
+                                 `2023` == 4 ~ "Vigoureux",
+                                 `2023` == 3 ~ "Vigueur moyenne",
+                                 `2023` == 2 ~ "Faible",
+                                 `2024` == 1 ~ "Chétif")) %>%
+ mutate ( `2022` =  case_when(is.na(`2022`) == TRUE ~ " ", 
+                               `2022` >2.5 ~ "Très vigoureux",
+                                 `2022`<2 ~ "Vigoureux",
+                                 `2022` <1.5 ~ "Vigueur moyenne",
+                                 `2022` <1 ~ "Faible"))%>%
+  select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+
+  }    
+
+# défoliation fin d'été
+{dt_defoliation <- Defoliation_MM %>% filter (ID_placette==vecteurRR[[i]])%>%
+    rename(`2022`= PctDefolAout_2022,
+          `2023` = PctDefolAout_2023,
+          `2024` = PctDefolAout_2024,
+          `2025` = PctDefolJuillet_2025  )%>%
+    mutate(`2022` =  case_when(is.na(`2022`) == TRUE ~ " ",  !(is.na(`2022`)) ~ paste0(`2022`, " %"))) %>%
+    mutate(`2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  !(is.na(`2023`)) ~ paste0(`2023`," %"))) %>%
+    mutate(`2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  !(is.na(`2024`)) ~ paste0(`2024`," %"))) %>%
+    mutate(`2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  !(is.na(`2025`)) ~ paste0(`2025`, " %"))) %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+  }    
+
+
+# 
+# parasol2023 <- RR2023_parasol %>% filter (ID_placette==vecteurRR[[i]]) %>%
+#   mutate(Effet_parasol =  case_when(is.na(Effet_parasol) == TRUE ~ " ",   !(is.na(Effet_parasol)) ~ paste0(Effet_parasol)))
+# parasol2023_value <-   as.character(parasol2023[1, 2])
+# parasol2023_txt <- case_when(parasol2023_value == "EC" ~ "Effet parasol : Entrecoeurs protègent les grappes",
+#           parasol2023_value == "LP" ~ "Effet parasol : Feuilles à longs pétioles",  
+#           parasol2023_value == "2" ~ "Double effet parasol : nombreux entrecoeurs + longs pétioles",
+#           parasol2023_value == "-" ~ "Pas d'effet parasol : grappes particulièrement exposées",
+#           parasol2023_value == " " ~ " "       )
+# 
+# exposition2024 <- RR2024_exposition_grappes %>% filter (ID_placette==vecteurRR[[i]]) %>%
+#   mutate(pct_grappes_exposées =  case_when(is.na(pct_grappes_exposées) == TRUE ~ " ", 
+#                                               !(is.na(pct_grappes_exposées)) ~ paste0(pct_grappes_exposées)))
+# exposition2024_value <-   as.character(exposition2024[1, 3])
+# exposition2024_txt <- ifelse(exposition2024_value == "" ,  " "  , 
+#                               paste0(exposition2024_value, " % des grappes exposées pendant maturation")    )
+# }
+
+# Coulure
+{
+dt_coulure <- Coulure_MM %>% filter (ID_placette==vecteurRR[[i]]) %>% select (ID_placette, Coulure_2022, Coulure_2023,Coulure_2024,Coulure_2025) %>%
+    rename (`2022`=Coulure_2022,`2023` = Coulure_2023,`2024`= Coulure_2024,  `2025` = Coulure_2025) %>% 
+    mutate ( `2022` =  case_when(is.na(`2022`) == TRUE ~ " ",  
+                                 `2022` >= "8" ~ "Pas de coulure",
+                                 `2022` >= "6" ~ "Légère coulure",
+                                 `2022` >= "5" ~ "Coulure moyenne",
+                                 `2022` >= "4" ~ "Coulure importante",
+                                 `2022` >= "1" ~ "Très forte coulure" )) %>%
+    mutate ( `2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  
+                                 `2023` >= "8" ~ "Pas de coulure",
+                                 `2023` >= "6" ~ "Légère coulure",
+                                 `2023` >= "5" ~ "Coulure moyenne",
+                                 `2023` >= "4" ~ "Coulure importante",
+                                 `2023` >= "1" ~ "Très forte coulure" ))%>%
+    mutate ( `2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  
+                                 `2024` >= "8" ~ "Pas de coulure",
+                                 `2024` >= "6" ~ "Légère coulure",
+                                 `2024` >= "5" ~ "Coulure moyenne",
+                                 `2024` >= "4" ~ "Coulure importante",
+                                 `2024` >= "1" ~ "Très forte coulure" ))%>%
+    mutate ( `2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  
+                                 `2025` >= "8" ~ "Pas de coulure",
+                                 `2025` >= "6" ~ "Légère coulure",
+                                 `2025` >= "5" ~ "Coulure moyenne",
+                                 `2025` >= "4" ~ "Coulure importante",
+                                 `2025` >= "1" ~ "Très forte coulure" ))%>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+}
+
+
+
+# Millerandage
+{  
+dt_millerandage <- Millerandage_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
+    rename (`2022`=Millerandage_2022,`2023` = Millerandage_2023,`2024`= Millerandage_2024,  `2025` = Millerandage_2025) %>% 
+    mutate ( `2022` =  case_when(is.na(`2022`) == TRUE ~ " ",  
+                                 `2022` >= "8" ~ "Pas de millerandage",
+                                 `2022` >= "7" ~ "Léger millerandage",
+                                 `2022` >= "6" ~ "Millerandage moyen",
+                                 `2022` >= "5" ~ "Millerandage important",  
+                                 `2022` >= "1" ~ "Très fort millerandage" )) %>%
+    mutate ( `2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  
+                                 `2023` >= "8" ~ "Pas de millerandage",
+                                 `2023` >= "7" ~ "Léger millerandage",
+                                 `2023` >= "6" ~ "Millerandage moyen",
+                                 `2023` >= "5" ~ "Millerandage important",  
+                                 `2023` >= "1" ~ "Très fort millerandage" )) %>%
+     mutate ( `2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  
+                                 `2024` >= "8" ~ "Pas de millerandage",
+                                 `2024` >= "7" ~ "Léger millerandage",
+                                 `2024` >= "6" ~ "Millerandage moyen",
+                                 `2024` >= "5" ~ "Millerandage important",  
+                                 `2024` >= "1" ~ "Très fort millerandage" )) %>%
+     mutate ( `2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  
+                                 `2025` >= "8" ~ "Pas de millerandage",
+                                 `2025` >= "7" ~ "Léger millerandage",
+                                 `2025` >= "6" ~ "Millerandage moyen",
+                                 `2025` >= "5" ~ "Millerandage important",  
+                                 `2025` >= "1" ~ "Très fort millerandage" )) %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+}  
+ 
+
+
+# flétrissements
+{  
+dt_fletri <- Fletri_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
+    rename (`2022`=Fletrissement_2022,`2023` = Fletrissement_2023) %>% 
+    mutate ( `2022` =  case_when(is.na(`2022`) == TRUE ~ " ", 
+                                 (`2022`==0) ~ "non",
+                                 (`2022`==1)~ "oui")) %>%
+   mutate ( `2023` =  case_when(is.na(`2023`) == TRUE ~ " ", 
+                                 (`2023`==0) ~ "non",
+                                 (`2023`== 0.5)~ "un peu",
+                                 (`2023`==1)~ "oui")) %>%
+    mutate(`2024`="non") %>%
+    mutate(`2025`="non") %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+}
+
+# regonflement des baies
+# {
+# #   regonflement2022 <- RR2022_regonflement_baies %>% filter (ID_placette==vecteurRR[[i]])
+# # regonflement2022_txt <-   as.character(regonflement2022[1, 2])
+# 
+# regonflement2023 <- RR2023_regonflement_baies %>% filter (ID_placette==vecteurRR[[i]])
+# regonflement2023_txt <-   as.character(regonflement2023[1, 2])
+# 
+# regonflement2024_txt <-   ""
+# }
+# vigueur diametre des bois
+
+  
+## assemblons les différents tableaux ##
+Parametre <- c( "Vigueur","Défoliation",   "Coulure", "Millerandage", "Flétrissement","Commentaire à la récolte" )
+dt_genotype <- bind_rows(  dt_feuillage, dt_defoliation, dt_coulure, dt_millerandage, dt_fletri, dt_commentaires)
+
+dt_genotype2 <- dt_genotype  %>%
+  mutate(Paramètre = Parametre)%>%
+  select(-ID_placette)%>%
+  select(5,1,2,3,4)
+   
+# ## TABLEAU des caractères viticoles
+# dt_viti_final <- dt_genotype2 %>%
+#   knitr::kable(align = "c")%>%
+#   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive", font_size=9))%>%
+#   kableExtra::row_spec(0, bold = T)
+
+gt_viti_final <- gt(dt_genotype2) %>%
+  cols_label( Paramètre ="") %>%
+  tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
+            locations=cells_column_labels(columns = everything())) %>%
+  tab_style(style = list (cell_fill(color = 'white' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Paramètre) , rows= everything()))%>%
+  tab_style(style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything()) )%>%
+  tab_style(style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())    )
+  
+
+
+# Necroses
+sous_tablo_necrosesMM <- RR_Necroses_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
+  select(ID_placette,  Necroses_classe_2023, Necroses_classe_2024, Avec_mildiou_actif)
+
+dt_necroses <- Necroses_totales_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
+  rename (`2022`= Necroses_intensite_globale_2022,`2023` = Necroses_Intensite_globale_fin_saison_2023,
+          `2024`= `Necroses_+_Mildiou_Actif_Intensite_globale_fin_saison_2024`,  `2025` = `Necroses_+_Mildiou_Actif_Intensite_globale_fin_saison_2025`) %>%   mutate ( `2022` =  case_when(is.na(`2022`) == TRUE ~ " ",  
+                                 `2022` <1 ~ "< 1%",
+                                 `2022` <=3 ~ "1 à 3%",
+                                 `2022` <= "5" ~ "3 à 5%",
+                                 `2022` <= "10" ~ "5 à 10%",  
+                                 `2022` >= "20" ~ "10 à 20%",
+                                 `2022` > "20" ~ "> 20%",
+                                 )) %>%
+  mutate ( `2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  
+                                 `2023` <1 ~ "< 1%",
+                                 `2023` <=3 ~ "1 à 3%",
+                                 `2023` <= "5" ~ "3 à 5%",
+                                 `2023` <= "10" ~ "5 à 10%",  
+                                 `2023` >= "20" ~ "10 à 20%",
+                                 `2023` > "20" ~ "> 20%",
+                                 )) %>%
+  mutate ( `2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  
+                                 `2024` <1 ~ "< 1%",
+                                 `2024` <=3 ~ "1 à 3%",
+                                 `2024` <= "5" ~ "3 à 5%",
+                                 `2024` <= "10" ~ "5 à 10%",  
+                                 `2024` >= "20" ~ "10 à 20%",
+                                 `2024` > "20" ~ "> 20%",
+                                 )) %>%
+  mutate ( `2025` =  case_when(is.na(`2025`) == TRUE ~ " ",
+                               `2025` ==0  ~ "",
+                                 `2025` <1 ~ "< 1%",
+                                 `2025` <=3 ~ "1 à 3%",
+                                 `2025` <= "5" ~ "3 à 5%",
+                                 `2025` <= "10" ~ "5 à 10%",  
+                                 `2025` >= "20" ~ "10 à 20%",
+                                 `2025` > "20" ~ "> 20%",
+                                 )) %>%
+  select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+
+
+gt_maladies <- gt(sous_tablo_necrosesMM) %>%
+  cols_label( ID_placette ="",    Necroses_classe_2023 = "Nécroses 2023",    Necroses_classe_2024 = "Nécroses 2024",
+    Avec_mildiou_actif =html("Présence mildiou actif<br>fin saison 2024 ?")) %>%
+ 
+  tab_style(style = list (cell_fill(color = '#186c20' ),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023=="<1%"))%>%
+  tab_style(style = list (cell_fill(color = '#3ea048'),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023=="1 à 3%"))%>%
+  tab_style(style = list (cell_fill(color = '#76d478' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023=="3 à 5%"))%>%
+  tab_style(style = list (cell_fill(color = '#fcb091' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023=="5 à 10%"))%>%
+  tab_style(style = list (cell_fill(color =  '#ec6944' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023=="10 à 20%"))%>%
+  tab_style(style = list (cell_fill(color =  '#bc2c16' ),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2023) , rows= Necroses_classe_2023==">20%")) %>%
+  
+  tab_style(style = list (cell_fill(color = '#186c20' ),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024=="<1%"))%>%
+  tab_style(style = list (cell_fill(color = '#3ea048'),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024=="1 à 3%"))%>%
+  tab_style(style = list (cell_fill(color = '#76d478' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024=="3 à 5%"))%>%
+  tab_style(style = list (cell_fill(color = '#fcb091' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024=="5 à 10%"))%>%
+  tab_style(style = list (cell_fill(color =  '#ec6944' ),  cell_text(weight="bold", color="black")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024=="10 à 20%"))%>%
+  tab_style(style = list (cell_fill(color =  '#bc2c16' ),  cell_text(weight="bold", color="white")),
+            locations = cells_body( columns = c(Necroses_classe_2024) , rows= Necroses_classe_2024==">20%")) %>%
+  
+  tab_style(style = list ( cell_text(weight="bold", color="red3", size=8)),
+            locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="OUI (>20%)"))%>%
+  tab_style(style = list ( cell_text(weight="bold", color="red", size=6)),
+            locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Oui (5-20%)")) %>%
+  # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
+  #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Léger (2-5%)"))%>%
+  # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
+  #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="Espilon (<1%))"))%>%
+  # tab_style(style = list ( cell_text(weight="bold", color="red", size=8)),
+  #           locations = cells_body( columns = c(Avec_mildiou_actif) , rows= Avec_mildiou_actif=="NON"))
+  tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
+            locations=cells_column_labels(columns = everything())) %>%
+  tab_style(style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything()) )%>%
+  tab_style(style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())    )
+      
+
+gt_necroses_new <- gt(dt_necroses) %>%
+  cols_label( ID_placette ="") %>%
+  tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
+            locations=cells_column_labels(columns = everything())) %>%
+  tab_style(style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything()) )%>%
+  tab_style(style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())    )
+  
+
+# Necroses : palette
+# ("<1%","1 à 3%", "3 à 5%", "5 à 10%", "10 à 20%",">20%" ),
+#'#186c20', '#3ea048', '#76d478', '#fcb091', '#ec6944', '#bc2c16',
+# Mildiou : Palette
+# OUI (>20%)
+# Oui (5-20%)
+# Léger (2-5%)
+# Espilon (<1%)
+# NON
+
+
+# Black-Rot
+{
+  
+dt_BR <- BR_MM %>% filter (ID_placette==vecteurRR[[i]]) %>% mutate(`2022`= " ") %>%
+    rename (`2023`=BR_PctPerteRecolte_2023,`2024`= BR_PctPerteRecolte_2024,  `2025` = BR_PctPerteRecolte_2025) %>% 
+     mutate(`2023` =  case_when(is.na(`2023`) == TRUE ~ " ",  !(is.na(`2023`)) ~ paste0(`2023`," %"))) %>%
+    mutate(`2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  !(is.na(`2024`)) ~ paste0(`2024`," %"))) %>%
+    mutate(`2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  !(is.na(`2025`)) ~ paste0(`2025`, " %"))) %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+
+}
+
+
+gt_blackrot <- gt(dt_BR) %>%
+  cols_label( ID_placette ="") %>%
+  tab_style(style = cell_text(weight="bold", color="black", size=6, align="center"),
+            locations=cells_column_labels(columns = everything())) %>%
+  tab_style(style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything()) )%>%
+  tab_style(style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())    )
+  
+
+## stades pheno
+{
+debourrement <- paste0("Viti/Deb/MULTI_boxplot_Deb_",vecteurRR[[i]],".png")
+veraison <- paste0("Viti/Veraison/MULTI_boxplot_Ver_",vecteurRR[[i]],".png")
+maturecolte <- paste0("Viti/MatuRec/MULTI_boxplot_MatuRec_",vecteurRR[[i]],".png")
+duree_cycle <- paste0("Viti/Cycle/Duree_cycle_",vecteurRR[[i]],".png")
+}
+## matu
+{TAVPplot <- paste0("Viti/TAVP/MULTI_boxplot_TAVP_",vecteurRR[[i]],".png")
+ATplot <- paste0("Viti/AT/MULTI_boxplot_AT_",vecteurRR[[i]],".png")
+Poids50bplot <- paste0("Viti/Poids50baies/MULTI_boxplot_P50b_",vecteurRR[[i]],".png")
+GraphMatuIndiv2025 <- paste0("Viti/MatuIndiv2025/",vecteurRR[[i]],"_SuiviMatu-Rhodania.jpg")
+GraphMatuIndiv2024 <- paste0("Viti/MatuIndiv2024/",vecteurRR[[i]],"_SuiviMatu-Rhodania.jpg")
+GraphMatuIndiv2023 <- paste0("Viti/MatuIndiv2023/RR2023_TAVP_AT_",vecteurRR[[i]],".png")
+GraphMatuIndiv2022 <- paste0("Viti/MatuIndiv2022/RR2022_TAVP_AT_",vecteurRR[[i]],".png")
+}
+
+
+
+## récolte
+{
+RDT_MM <- paste0("Viti/RDT/MULTI_boxplot_RDT_",vecteurRR[[i]],".png")  
+  
+Rdt2025 <- paste0("Viti/Recolte2025/Poids par cep/RR2025_recolte_",vecteurRR[[i]],".png")
+Rdt2025 <- ifelse(isTRUE(file.exists(Rdt2025)), paste0("![](",Rdt2025,")"),"Non récolté en 2025")
+
+Rdt2024 <- paste0("Viti/Recolte2024/Poids par cep/RR2024_recolte_",vecteurRR[[i]],".png")
+Rdt2024 <- ifelse(isTRUE(file.exists(Rdt2024)), paste0("![](",Rdt2024,")"),"Non récolté en 2024")
+
+Rdt2023 <- paste0("Viti/Recolte2023/Poids par cep/RR2023_recolte_poidsparcep_",vecteurRR[[i]],".png")
+Rdt2023 <- ifelse(isTRUE(file.exists(Rdt2023)), paste0("![](",Rdt2023,")"),"Non récolté en 2023")
+
+Rdt2022 <- paste0("Viti/Recolte2022/Poids par cep/RR2022_recolte_poidsparcep_",vecteurRR[[i]],".png")
+Rdt2022 <- ifelse(isTRUE(file.exists(Rdt2022)), paste0("![](",Rdt2022,")"),"Non récolté en 2022")
+
+NbGrappe2025 <- paste0("Viti/Recolte2025/Nb grappes par cep/RR2025_recolte_nb_grappe_",vecteurRR[[i]],".png")
+NbGrappe2025 <- ifelse(isTRUE(file.exists(NbGrappe2025)), paste0("![](",NbGrappe2025,")"),"Non récolté en 2025")
+
+NbGrappe2024 <- paste0("Viti/Recolte2024/Nb grappes par cep/RR2024_recolte_nb_grappe_",vecteurRR[[i]],".png")
+NbGrappe2024 <- ifelse(isTRUE(file.exists(NbGrappe2024)), paste0("![](",NbGrappe2024,")"),"Non récolté en 2024")
+
+NbGrappe2023 <- paste0("Viti/Recolte2023/Nb grappes par cep/RR2023_recolte_nbgrappesparcep_",vecteurRR[[i]],".png")
+NbGrappe2023 <- ifelse(isTRUE(file.exists(NbGrappe2023)), paste0("![](",NbGrappe2023,")"),"Non récolté en 2023")
+
+NbGrappe2022 <- paste0("Viti/Recolte2022/Nb grappes par cep/RR2022_recolte_nbgrappesparcep_",vecteurRR[[i]],".png")
+NbGrappe2022 <- ifelse(isTRUE(file.exists(NbGrappe2022)), paste0("![](",NbGrappe2022,")"),"Non récolté en 2022")
+
+PdsGrappe2025 <- paste0("Viti/Recolte2025/Poids une grappe/RR2025_recolte_poids_grappe",vecteurRR[[i]],".png")
+PdsGrappe2025 <- ifelse(isTRUE(file.exists(PdsGrappe2025)), paste0("![](",PdsGrappe2025,")"),"Non récolté en 2025")
+
+PdsGrappe2024 <- paste0("Viti/Recolte2024/Poids une grappe/RR2024_recolte_poids_grappe",vecteurRR[[i]],".png")
+PdsGrappe2024 <- ifelse(isTRUE(file.exists(PdsGrappe2024)), paste0("![](",PdsGrappe2024,")"),"Non récolté en 2024")
+
+PdsGrappe2023 <- paste0("Viti/Recolte2023/Poids une grappe/RR2023_recolte_poids1grappe_",vecteurRR[[i]],".png")
+PdsGrappe2023 <- ifelse(isTRUE(file.exists(PdsGrappe2023)), paste0("![](",PdsGrappe2023,")"),"Non récolté en 2023")
+
+PdsGrappe2022 <- paste0("Viti/Recolte2022/Poids une grappe/RR2022_recolte_poids1grappe_",vecteurRR[[i]],".png")
+PdsGrappe2022 <- ifelse(isTRUE(file.exists(PdsGrappe2022)), paste0("![](",PdsGrappe2022,")"),"Non récolté en 2022")
+}
+
+## oeno
+
+# création d'un dataframe avec les analyses 2025
+{dtoeno2025 <- RR2025_analyses_premise %>% filter (ID_geno==vecteurRR[[i]])%>%
+  select(`TAV (%vol)`, AT, pH, `Intensité colorante`, `Indice de Polyphénols Totaux`) 
+
+if(nrow(dtoeno2025) == 0){
+  gt_oeno2025 <- as.character("Non vinifié en 2025" )
+} else{
+  gt_oeno2025 <- gt(dtoeno2025) %>%
+  tab_header(title=md("**Analyses vin 2025**")) %>%
+  cols_label( `TAV (%vol)` = html("TAVP<br>% vol"),
+    AT = html("Acidité Totale<br>g H<sub>2</sub>SO<sub>4</sub>/L"),
+    `Intensité colorante` = html("Intensité<br>colorante"),
+    `Indice de Polyphénols Totaux` = html("Indice de<br>polyphénols <br>totaux")
+    ) %>%
+  fmt_number(columns=c(2,3,4),decimals = 2,dec_mark = ".")%>%
+  fmt_number(columns=5,decimals = 1)%>%
+  tab_style(
+    style = cell_text( align = "center"),
+    locations = cells_column_labels(columns = everything())
+    )%>%
+  tab_style(
+    style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything())
+    )%>%
+  tab_style(
+    style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())
+    )
+}
+}
+
+
+
+# création d'un dataframe avec les analyses 2024
+{dtoeno2024 <- RR2024_analyses_premise %>% filter (ID_geno==vecteurRR[[i]])%>%
+  select(`Titre alcoométrique volumique`,AT, pH, `Intensité colorante`, `Indice de Polyphénols Totaux`) 
+
+if(nrow(dtoeno2024) == 0){
+  gt_oeno2024 <- as.character("Non vinifié en 2024" )
+} else{
+  gt_oeno2024 <- gt(dtoeno2024) %>%
+  tab_header(title=md("**Analyses vin 2024**")) %>%
+  cols_label( `Titre alcoométrique volumique` = html("TAVP<br>% vol"),
+     AT = html("Acidité Totale<br>g H<sub>2</sub>SO<sub>4</sub>/L"),
+    `Intensité colorante` = html("Intensité<br>colorante"),
+    `Indice de Polyphénols Totaux` = html("Indice de<br>polyphénols <br>totaux")
+    ) %>%
+  fmt_number(columns=c(2,3,4),decimals = 2,dec_mark = ".")%>%
+  fmt_number(columns=5,decimals = 1)%>%
+  tab_style(
+    style = cell_text( align = "center"),
+    locations = cells_column_labels(columns = everything())
+    )%>%
+  tab_style(
+    style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything())
+    )%>%
+  tab_style(
+    style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())
+    )
+}
+}
+
+# création d'un dataframe avec les analyses 2022
+{dtoeno2022 <- RR2022_analyses_premise %>% filter (ID_geno==vecteurRR[[i]])%>%
+  select(Moda_oeno, TAVP, AT, pH, IC, IPT) %>%
+  mutate(Moda_oeno =  case_when(is.na(Moda_oeno) == TRUE ~ " ",   !(is.na(Moda_oeno)) ~ paste0(Moda_oeno)))
+
+if(nrow(dtoeno2022) == 0){
+  gt_oeno2022 <- as.character("Non vinifié en 2022" )
+} else{
+  gt_oeno2022 <- gt(dtoeno2022, rowname_col = "Moda_oeno") %>%
+  tab_header(title=md("**Analyses mise 2022**")) %>%
+  cols_label( TAVP = html("TAVP<br>% vol"),
+    AT = html("Acidité Totale<br>g H<sub>2</sub>SO<sub>4</sub>/L"),
+    IC = html("Intensité<br>colorante"),
+    IPT = html("Indice de<br>polyphénols <br>totaux")) %>%
+  fmt_number(columns=c(2,3,4),decimals = 2,dec_mark = ".")%>%
+  fmt_number(columns=5,decimals = 1)%>%
+  tab_style(
+    style = cell_text( align = "center"),
+    locations = cells_column_labels(columns = everything())
+    )%>%
+  tab_style(
+    style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything())
+    )%>%
+  tab_style(
+    style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())
+    )
+}
+}
+# création d'un dataframe avec les analyses 2023
+{dtoeno2023 <- RR2023_analyses_premise %>% filter (ID_geno==vecteurRR[[i]])%>%
+  select(Moda_oeno, TAVP, AT, pH, IC, IPT) %>%
+  mutate(Moda_oeno =  case_when(is.na(Moda_oeno) == TRUE ~ " ",   !(is.na(Moda_oeno)) ~ paste0(Moda_oeno)))
+
+if(nrow(dtoeno2023) == 0){
+  gt_oeno2023 <- as.character("Non vinifié en 2023" )
+} else{
+  gt_oeno2023 <- gt(dtoeno2023, rowname_col = "Moda_oeno") %>%
+  tab_header(title=md("**Analyses pré-mise 2023**")) %>%
+  cols_label( TAVP = html("TAVP<br>% vol"),
+    AT = html("Acidité Totale<br>g H<sub>2</sub>SO<sub>4</sub>/L"),
+    IC = html("Intensité<br>colorante"),
+    IPT = html("Indice de<br>polyphénols <br>totaux")) %>%
+  fmt_number(columns=c(2,3,4),decimals = 2,dec_mark = ".")%>%
+  fmt_number(columns=5,decimals = 1)%>%
+  tab_style(
+    style = cell_text( align = "center"),
+    locations = cells_column_labels(columns = everything())
+    )%>%
+  tab_style(
+    style=cell_borders(sides = "all", color = "lightgrey", style = "solid", weight = px(1)),
+    locations = cells_body(columns = everything(), rows = everything())
+    )%>%
+  tab_style(
+    style="padding-top:8px ; padding-bottom:8px ; padding-left:12px ; padding-right:12px",
+    locations = cells_column_labels(columns = everything())
+    )
+}
+}
+
+## senso
+
+{Nuage2022 <- paste0("Senso/Nuages de mots_2022/RR2022_",vecteurRR[[i]],".png")
+Nuage2022 <- ifelse(isTRUE(file.exists(Nuage2022)), paste0("![](",Nuage2022,")"),"Non dégusté")
+dtappreciation2022 <- appreciation2022 %>% filter (ID_placette==vecteurRR[[i]])
+nbetoiles2022 <- as.numeric(dtappreciation2022[1,2])
+imgetoiles2022 <- ifelse (nbetoiles2022 == 1, "Senso/Etoiles/1etoile.png",
+                   ifelse (nbetoiles2022==2,"Senso/Etoiles/2etoiles.png",
+                           ifelse (nbetoiles2022==3,"Senso/Etoiles/3etoiles.png",
+                                   ifelse (nbetoiles2022==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
+
+imgetoiles2022 <- ifelse(nrow(dtappreciation2022)>0, paste0("![](",imgetoiles2022,"), en 2022 parmi les 18 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2022")
+}
+
+{Nuage2023 <- paste0("Senso/Nuages de mots_2023/RR2023_",vecteurRR[[i]],".png")
+Nuage2023 <- ifelse(isTRUE(file.exists(Nuage2023)), paste0("![](",Nuage2023,")"),"Non dégusté")
+dtappreciation2023 <- appreciation2023 %>% filter (ID_placette==vecteurRR[[i]])
+nbetoiles2023 <- as.numeric(dtappreciation2023[1,2])
+imgetoiles2023 <- ifelse (nbetoiles2023 == 1, "Senso/Etoiles/1etoile.png",
+                   ifelse (nbetoiles2023==2,"Senso/Etoiles/2etoiles.png",
+                           ifelse (nbetoiles2023==3,"Senso/Etoiles/3etoiles.png",
+                                   ifelse (nbetoiles2023==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
+
+imgetoiles2023 <- ifelse(nrow(dtappreciation2023)>0, 
+                         paste0("![](",imgetoiles2023,"), en 2023 parmi les 23 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2023")
+}
+
+{
+dtappreciation2024 <- appreciation2024 %>% filter (ID_placette==vecteurRR[[i]])
+nbetoiles2024 <- as.numeric(dtappreciation2024[1,2])
+imgetoiles2024 <- ifelse (nbetoiles2024 == 1, "Senso/Etoiles/1etoile.png",
+                   ifelse (nbetoiles2024==2,"Senso/Etoiles/2etoiles.png",
+                           ifelse (nbetoiles2024==3,"Senso/Etoiles/3etoiles.png",
+                                   ifelse (nbetoiles2024==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
+
+imgetoiles2024 <- ifelse(nrow(dtappreciation2024)>0, 
+                         paste0("![](",imgetoiles2024,"), en 2024 parmi les 42 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2024")
+}
+
+#### ICI DEBUTE LE TEXTE A REPETER POUR CHAQUE GENOTYPE ####
+cat("\n") 
+cat("#", vecteurRR[[i]],  "{.unnumbered}","\n")  
+#le paragraphe des détails du génotype  
+cat("\n") 
+cat("## Détails génotype ","{.unnumbered}","\n")
+cat("\n") 
+cat("Nom génotype :", vecteurRR[[i]],"\n" )
+cat("\n") 
+cat("Nom IFV :", nomIFV,"\n" )
+cat("\n") 
+cat("Surnom :", surnom,"\n" ) 
+cat("\n") 
+cat("Croisement :", croisement,"\n" )
+cat("\n") 
+cat("Année plantation :", anneeplantation,"\n" )
+cat("\n") 
+
+cat("Réserve Utile de la placette calculée  ", "<font size=6>",RU_txt,"</font>\n") 
+cat("\n") 
+cat("## Photos ","{.unnumbered}","\n")
+cat("\n") 
+cat("![](",image_feuille,")","\n")
+cat("\n") 
+cat("![](",image_grappe_2022,")","![](",image_grappe_2023,")","![](",image_grappe_2024,")","![](",image_grappe_2025,")","\n")
+cat("\n") 
+
+#récap tableau params viti
+cat("\n") 
+cat("## Caractères viticoles","{.unnumbered}","\n")
+cat("\n") 
+cat("Résumé **appréciation globale viticole** à l'approche de la récolte :\n")
+print(htmltools::tagList(gt_smileys_viti))
+cat("\n","\n") 
+cat("Visuel général entre véraison et récolte : ", "\n")
+cat("![2022](",image_allure_2022,")","![2023](",image_allure_2023,")","![2024](",image_allure_2024,")","![2025](",image_allure_2025,")","\n")
+cat("\n") 
+print(htmltools::tagList(gt_viti_final))
+cat("\n") 
+cat("\n")
+
+#le paragraphe des maladies
+cat("\n") 
+cat("## Maladies", "{.unnumbered}","\n")
+cat("Intensité globale des nécroses affectant le feuillage")
+cat("\n") 
+print(htmltools::tagList(gt_maladies))
+cat("\n") 
+print(htmltools::tagList(gt_necroses_new))
+cat("\n") 
+cat("Black-Rot")
+cat("\n") 
+print(htmltools::tagList(gt_blackrot))
+cat("\n") 
+
+
+#le paragraphe des stades phéno
+cat("\n") 
+cat("## Stades phénologiques", "{.unnumbered}","\n")
+cat("\n") 
+cat("![](",debourrement,")","![](",veraison,")","![](",maturecolte,")","\n")
+cat("\n") 
+cat("Durée de cycle en degrés.jours, calculée sur les millésimes 2021 à 2024, en comparaison avec les témoins et quelques valeurs de référence :")
+cat("\n") 
+cat("\n") 
+cat("![](",duree_cycle,")","\n")
+
+#le paragraphe maturité
+cat("\n") 
+cat("## Maturité"," {.tabset .unnumbered}","\n")
+cat("\n") 
+cat("Principaux paramètres de maturité à la récolte sur les trois millésimes suivis")
+cat("\n") 
+cat("![](",TAVPplot,")","![](",ATplot,")","![](",Poids50bplot,")","\n")
+cat("\n") 
+cat("### Suivi matu 2025","{.unnumbered}","\n") 
+cat("\n") 
+cat("Evolution des paramètres maturité au cours de la campagne 2025     ")
+cat("\n") 
+cat("![](",GraphMatuIndiv2025,")","\n")
+cat("\n") 
+cat("### Suivi matu 2024","{.unnumbered}","\n") 
+cat("\n") 
+cat("Evolution des paramètres maturité au cours de la campagne 2024     ")
+cat("\n") 
+cat("![](",GraphMatuIndiv2024,")","\n")
+cat("\n") 
+cat("### Suivi matu 2023","{.unnumbered}","\n") 
+cat("\n") 
+cat("Evolution des paramètres maturité au cours de la campagne 2023     ")
+cat("\n") 
+cat("![](",GraphMatuIndiv2023,")","\n")
+cat("\n") 
+cat("### Suivi matu 2022","{.unnumbered}","\n") 
+cat("\n") 
+cat("Evolution des paramètres maturité au cours de la campagne 2022     ")
+cat("\n") 
+cat("![](",GraphMatuIndiv2022,")","\n")
+cat("\n") 
+
+#le paragraphe récolte
+cat("\n") 
+cat("## Récolte","{.tabset .unnumbered}","\n") 
+cat("\n") 
+cat("### Rendement kg/cep","{.unnumbered}","\n") 
+cat("\n") 
+cat("Un génotype n'est vinifié que s'il y a suffisamment de récolte sur la placette pour un fermenteur de 10L. Le minimum fixé est de 7kg par génotype.","\n")
+cat("\n") 
+cat(Rdt2025,Rdt2024,Rdt2023,Rdt2022,"\n")
+cat("\n") 
+cat("### Poids des grappes","{.unnumbered}","\n") 
+cat("\n") 
+cat(PdsGrappe2025,PdsGrappe2024,PdsGrappe2023,PdsGrappe2022,"\n")
+cat("\n") 
+cat("### Nombre de grappes par cep","{.unnumbered}","\n") 
+cat("\n") 
+cat(NbGrappe2025,NbGrappe2024,NbGrappe2023,NbGrappe2022,"\n")
+
+#le paragraphe oenologie
+cat("\n") 
+cat("## Paramètres oenologiques ","{.tabset .unnumbered}","\n")
+### 2025
+cat("### 2025", " { .unnumbered}" ,"\n")
+cat("\n") 
+print(htmltools::tagList(gt_oeno2025))
+cat("\n") 
+
+
+### 2024
+cat("### 2024", " { .unnumbered}" ,"\n")
+cat("\n") 
+print(htmltools::tagList(gt_oeno2024))
+cat("\n") 
+
+### 2023
+cat("\n") 
+cat("### 2023", " { .unnumbered}" ,"\n")
+cat("\n") 
+print(htmltools::tagList(gt_oeno2023))
+cat("\n") 
+
+### 2022
+cat("### 2022", " { .unnumbered}" ,"\n")
+cat("\n") 
+print(htmltools::tagList(gt_oeno2022))
+cat("\n") 
+
+
+#le paragraphe senso
+cat("\n") 
+cat("## Profil sensoriel"," {.tabset .unnumbered}","\n")
+### 2024
+cat("### 2024", " { .unnumbered}" ,"\n")
+cat("\n") 
+cat("Les vins de 2024 ont été dégustés de façon rapide, en 3 sessions en janvier 2025, en donnant juste une note d'appréciation globale.<br>Les vins les + appréciés seront redégustés dans un second temps afin de dresser le profil organoleptique. <br>")
+cat("\n") 
+cat(imgetoiles2024,"\n")
+cat("\n") 
+
+### 2023
+cat("### 2023", " { .unnumbered}" ,"\n")
+cat("\n") 
+cat("Nuage de mots représentant les grandes caractéristiques sensorielles du génotype, établies par la méthode de dégustation CATA (_Check All That Apply_) : les dégustateurs cochent les descripteurs ressentis parmi une liste préétablie de 15 critères.<br>
+Sur cette représentation graphique la taille des descripteurs est proportionnelle au nombre de fois où ils ont été cités pour un même vin, dégusté par une quinzaine de dégustateurs.<br>
+-> *Tous les génotypes n'ont pas été vinifiés en 2023, et certains ont été vinifiés mais non dégustés*<br>")
+cat("\n") 
+cat(Nuage2023,"\n")
+cat("\n") 
+cat(imgetoiles2023,"\n")
+cat("\n") 
+
+
+### 2022
+cat("### 2022", " { .unnumbered}" ,"\n")
+cat("\n") 
+cat("Nuage de mots représentant les grandes caractéristiques sensorielles du génotype, établies par la méthode de dégustation CATA (_Check All That Apply_) : les dégustateurs cochent les descripteurs ressentis parmi une liste préétablie de 15 critères.<br>
+Sur cette représentation graphique la taille des descripteurs est proportionnelle au nombre de fois où ils ont été cités pour un même vin, dégusté par une quinzaine de dégustateurs.<br>
+-> *Tous les génotypes n'ont pas été vinifiés en 2022, et certains ont été vinifiés mais non dégustés*<br>")
+cat("\n") 
+cat(Nuage2022,"\n")
+cat("\n") 
+cat(imgetoiles2022,"\n")
+cat("\n") 
+
+
+}
+
+```

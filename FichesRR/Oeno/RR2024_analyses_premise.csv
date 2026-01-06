@@ -1,4 +1,4 @@
-ID_geno;Millesime;Resu_DateAnalyse;Acide acétique;Acide lactique;Acide malique;Acidité totale;Dioxyde de carbone;Dioxyde de soufre libre;Dioxyde de soufre total;Ethanal;Glucose + Fructose;Indice de Polyphénols Totaux;Intensité colorante;pH;pH_manuel;SO2 Actif;Titre alcoométrique volumique
+ID_geno;Millesime;Resu_DateAnalyse;Acide acétique;Acide lactique;Acide malique;AT;Dioxyde de carbone;Dioxyde de soufre libre;Dioxyde de soufre total;Ethanal;Glucose + Fructose;Indice de Polyphénols Totaux;Intensité colorante;pH;pH_manuel;SO2 Actif;Titre alcoométrique volumique
 Floreal;2024;04/11/2024;0,43;0;0,8;3,4;;9;90;49;0;;;3,45;;0,3;12,42
 Grenache;2024;27/11/2024;0,18;2,1;0,1;2,57;920;30;94;18;0,1;31;1,3;3,95;3,99;0,31;10,93
 Lilaro;2024;27/11/2024;0,21;1,2;0,2;2,48;260;21;98;47;0,3;44;3,6;3,98;4,02;0,23;13,71

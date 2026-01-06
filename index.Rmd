@@ -37,11 +37,11 @@ logo <- "InstitutPetit.png"
 Compte-rendu technique de **2025** : [**LIEN vers résultats 2025 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2025.html)  
 Compte-rendu technique de **2024** : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
 Compte-rendu technique de **2023** : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
-  
-Fiches par génotypes (en cours d'actualisation avec les résultats 2025) :  
-**Génotypes plantés en 2019** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019-Fiches_2024.html)  
-**Génotypes plantés en 2019 - présélection pour VATE** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2019_shortlist-Fiches_2024.html)    
-**Génotypes plantés en 2021** : [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniensP2021-Fiches_2024.html)   
+
+# Fiches génotypes {.unnumbered}  
+Fiches par génotypes :  
+[**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniens-Fiches_2025.html)    
+
 
 # Résultats spécifiques Clairette de Die  {.unnumbered}
 Compte-rendu technique de **2025** : à venir  
