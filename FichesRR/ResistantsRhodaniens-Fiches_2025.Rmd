@@ -104,9 +104,10 @@ data_rr <- left_join(data_rr, IDgeno_copie)
 #rm(data, pheno, hydrik, maladies, rendement, viti, oeno, degust)
 
 # selection des données appréciation dégust
-appreciation2022 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2022)
-appreciation2023 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2023)
-appreciation2024 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2024)
+EtoilesDegust_MM <- data_rr %>% select(ID_placette, NbEtoiles_degust_2022, NbEtoiles_degust_2023, NbEtoiles_degust_2024, NbEtoiles_degust_2025)
+# appreciation2022 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2022)
+# appreciation2023 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2023)
+# appreciation2024 <- data_rr %>% select(ID_placette,NbEtoiles_degust_2024)
 
 #sélection des données oeno
 # data_Vins_2025 <- data_rr %>%
@@ -180,9 +181,6 @@ RR2022_regonflement_baies <- read_delim("Viti/RR2022_regonflement_baies.csv", de
 
 # commentaires de récolte
 Commentaires_MM <- data_rr %>% select(ID_placette,Commentaire_recolte_2023,Commentaire_recolte_2024,Commentaire_recolte_2025)
-
-# exposition des grappes et effet parasol
-ExpoGrappesMM <-  data_rr %>% select(ID_placette,PctGrappesExposees_2024, PctGrappesExposees_2025)
 
 # defloliation, expo des grappes et parasol
 Defoliation_MM <- data_rr %>% select(ID_placette,PctDefolAout_2022,PctDefolAout_2023,PctDefolAout_2024, PctDefolJuillet_2025)
@@ -313,6 +311,18 @@ dt_feuillage <- Feuillage_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
   }    
 
 
+# Exposition des grappes fin d'été
+{dt_grappes_exposees <- Grappes_exposees_MM %>% filter (ID_placette==vecteurRR[[i]])%>%
+    rename(`2024` = PctGrappesExposees_2024,
+          `2025` = PctGrappesExposees_2025  )%>%
+    mutate(`2022` =  " ") %>%
+    mutate(`2023` =   " ") %>%
+    mutate(`2024` =  case_when(is.na(`2024`) == TRUE ~ " ",  !(is.na(`2024`)) ~ paste0(`2024`," % "))) %>%
+    mutate(`2025` =  case_when(is.na(`2025`) == TRUE ~ " ",  !(is.na(`2025`)) ~ paste0(`2025`, " % "))) %>%
+    select(ID_placette, `2022`, `2023`, `2024`, `2025`)
+  }    
+
+
 # 
 # parasol2023 <- RR2023_parasol %>% filter (ID_placette==vecteurRR[[i]]) %>%
 #   mutate(Effet_parasol =  case_when(is.na(Effet_parasol) == TRUE ~ " ",   !(is.na(Effet_parasol)) ~ paste0(Effet_parasol)))
@@ -413,7 +423,7 @@ dt_fletri <- Fletri_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
     select(ID_placette, `2022`, `2023`, `2024`, `2025`)
 }
 
-# regonflement des baies
+# regonflement des baies " je zappe cette information je ne suis pas sûre que ce soit très utile
 # {
 # #   regonflement2022 <- RR2022_regonflement_baies %>% filter (ID_placette==vecteurRR[[i]])
 # # regonflement2022_txt <-   as.character(regonflement2022[1, 2])
@@ -427,19 +437,15 @@ dt_fletri <- Fletri_MM %>% filter (ID_placette==vecteurRR[[i]]) %>%
 
   
 ## assemblons les différents tableaux ##
-Parametre <- c( "Vigueur","Défoliation",   "Coulure", "Millerandage", "Flétrissement","Commentaire à la récolte" )
-dt_genotype <- bind_rows(  dt_feuillage, dt_defoliation, dt_coulure, dt_millerandage, dt_fletri, dt_commentaires)
+Parametre <- c( "Vigueur","Défoliation fin d'été (% feuilles tombées)","Exposition des grappes fin d'été (% grappes exposées)",   "Coulure", "Millerandage", "Flétrissement","Commentaire à la récolte" )
+dt_genotype <- bind_rows(  dt_feuillage, dt_defoliation,dt_grappes_exposees, dt_coulure, dt_millerandage, dt_fletri, dt_commentaires)
 
 dt_genotype2 <- dt_genotype  %>%
   mutate(Paramètre = Parametre)%>%
   select(-ID_placette)%>%
-  select(5,1,2,3,4)
+  select(Paramètre,  `2022`, `2023`, `2024`, `2025`)
    
 # ## TABLEAU des caractères viticoles
-# dt_viti_final <- dt_genotype2 %>%
-#   knitr::kable(align = "c")%>%
-#   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive", font_size=9))%>%
-#   kableExtra::row_spec(0, bold = T)
 
 gt_viti_final <- gt(dt_genotype2) %>%
   cols_label( Paramètre ="") %>%
@@ -776,43 +782,53 @@ if(nrow(dtoeno2023) == 0){
 }
 
 ## senso
+dt_etoiles_degust <- EtoilesDegust_MM %>% filter (ID_placette==vecteurRR[[i]])
 
 {Nuage2022 <- paste0("Senso/Nuages de mots_2022/RR2022_",vecteurRR[[i]],".png")
 Nuage2022 <- ifelse(isTRUE(file.exists(Nuage2022)), paste0("![](",Nuage2022,")"),"Non dégusté")
-dtappreciation2022 <- appreciation2022 %>% filter (ID_placette==vecteurRR[[i]])
-nbetoiles2022 <- as.numeric(dtappreciation2022[1,2])
+nbetoiles2022 <- as.numeric(dt_etoiles_degust[1,2])
 imgetoiles2022 <- ifelse (nbetoiles2022 == 1, "Senso/Etoiles/1etoile.png",
                    ifelse (nbetoiles2022==2,"Senso/Etoiles/2etoiles.png",
                            ifelse (nbetoiles2022==3,"Senso/Etoiles/3etoiles.png",
                                    ifelse (nbetoiles2022==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
-
-imgetoiles2022 <- ifelse(nrow(dtappreciation2022)>0, paste0("![](",imgetoiles2022,"), en 2022 parmi les 18 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2022")
-}
+imgetoiles2022 <-  ifelse(is.na(dt_etoiles_degust[1,2]) == TRUE , "Non dégusté en 2022",
+                          paste0("![](",imgetoiles2022,"), en 2022 parmi les 18 vins Résistants Rhodaniens dégustés"))
+  
+  }
 
 {Nuage2023 <- paste0("Senso/Nuages de mots_2023/RR2023_",vecteurRR[[i]],".png")
 Nuage2023 <- ifelse(isTRUE(file.exists(Nuage2023)), paste0("![](",Nuage2023,")"),"Non dégusté")
-dtappreciation2023 <- appreciation2023 %>% filter (ID_placette==vecteurRR[[i]])
-nbetoiles2023 <- as.numeric(dtappreciation2023[1,2])
+nbetoiles2023 <- as.numeric(dt_etoiles_degust[1,3])
 imgetoiles2023 <- ifelse (nbetoiles2023 == 1, "Senso/Etoiles/1etoile.png",
                    ifelse (nbetoiles2023==2,"Senso/Etoiles/2etoiles.png",
                            ifelse (nbetoiles2023==3,"Senso/Etoiles/3etoiles.png",
                                    ifelse (nbetoiles2023==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
+imgetoiles2023 <-  ifelse(is.na(dt_etoiles_degust[1,3]) == TRUE , "Non dégusté en 2023",
+                          paste0("![](",imgetoiles2023,"), en 2023 parmi les 23 vins Résistants Rhodaniens dégustés"))
 
-imgetoiles2023 <- ifelse(nrow(dtappreciation2023)>0, 
-                         paste0("![](",imgetoiles2023,"), en 2023 parmi les 23 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2023")
 }
 
 {
-dtappreciation2024 <- appreciation2024 %>% filter (ID_placette==vecteurRR[[i]])
-nbetoiles2024 <- as.numeric(dtappreciation2024[1,2])
+nbetoiles2024 <- as.numeric(dt_etoiles_degust[1,4])
 imgetoiles2024 <- ifelse (nbetoiles2024 == 1, "Senso/Etoiles/1etoile.png",
                    ifelse (nbetoiles2024==2,"Senso/Etoiles/2etoiles.png",
                            ifelse (nbetoiles2024==3,"Senso/Etoiles/3etoiles.png",
                                    ifelse (nbetoiles2024==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
-
-imgetoiles2024 <- ifelse(nrow(dtappreciation2024)>0, 
-                         paste0("![](",imgetoiles2024,"), en 2024 parmi les 42 vins Résistants Rhodaniens dégustés"),"Non dégusté en 2024")
+imgetoiles2024 <-  ifelse(is.na(dt_etoiles_degust[1,4]) == TRUE , "Non dégusté en 2024",
+                          paste0("![](",imgetoiles2024,"), en 2024 parmi les 42 vins Résistants Rhodaniens dégustés"))
 }
+
+
+{
+nbetoiles2025 <- as.numeric(dt_etoiles_degust[1,5])
+imgetoiles2025 <- ifelse (nbetoiles2025 == 1, "Senso/Etoiles/1etoile.png",
+                   ifelse (nbetoiles2025==2,"Senso/Etoiles/2etoiles.png",
+                           ifelse (nbetoiles2025==3,"Senso/Etoiles/3etoiles.png",
+                                   ifelse (nbetoiles2025==4,"Senso/Etoiles/4etoiles.png", "Senso/Etoiles/5etoiles.png" ))))
+imgetoiles2025 <-  ifelse(is.na(dt_etoiles_degust[1,5]) == TRUE , "Non dégusté en 2024",
+                          paste0("![](",imgetoiles2025,"), en 2025 parmi les 10 vins Résistants Rhodaniens dégustés"))
+}
+
 
 #### ICI DEBUTE LE TEXTE A REPETER POUR CHAQUE GENOTYPE ####
 cat("\n") 
@@ -965,6 +981,14 @@ cat("\n")
 #le paragraphe senso
 cat("\n") 
 cat("## Profil sensoriel"," {.tabset .unnumbered}","\n")
+### 2025
+cat("### 2025", " { .unnumbered}" ,"\n")
+cat("\n") 
+cat("Les vins de 2025 ont été dégustés de façon rapide, le 8 janvier 2026 à l'issue de la tenue du Comité de Pilotage, en notant les vins par une note d'appréciation globale sur 10.<br>Les vins les + appréciés seront redégustés dans un second temps afin de dresser le profil organoleptique. <br>")
+cat("\n") 
+cat(imgetoiles2025,"\n")
+cat("\n") 
+
 ### 2024
 cat("### 2024", " { .unnumbered}" ,"\n")
 cat("\n") 
