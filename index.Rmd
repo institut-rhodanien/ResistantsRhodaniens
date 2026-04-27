@@ -38,13 +38,14 @@ Compte-rendu technique de **2025** : [**LIEN vers résultats 2025 **](https://in
 Compte-rendu technique de **2024** : [**LIEN vers résultats 2024 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2024.html)  
 Compte-rendu technique de **2023** : [**LIEN vers résultats 2023 **](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsRhodaniens2023.html)  
 
-# Fiches génotypes {.unnumbered}  
+# Fiches génotypes Résistants Rhodaniens {.unnumbered}  
 Fiches par génotypes :  
 [**LIEN**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsRhodaniens-Fiches_2025.html)    
 
 
 # Résultats spécifiques Clairette de Die  {.unnumbered}
-Compte-rendu technique de **2025** : à venir  
+Compte-rendu technique de **2025** : [**LIEN 2025**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsClairette2025.html)  
+Fiches par **génotypes Clairette de Die** :  [**Fiches 2025**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsClairetteDeDie-Fiches_2025.html)    
 
 Compte-rendu technique de **2024** : [**LIEN 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/ResistantsClairette2024.html)  
 Fiches par **génotypes Clairette de Die** :  [**Fiches 2024**](https://institut-rhodanien.github.io/ResistantsRhodaniens/FichesRR/ResistantsClairetteDeDie-Fiches_2024.html)  
